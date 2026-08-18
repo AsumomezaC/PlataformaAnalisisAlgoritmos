@@ -1,0 +1,634 @@
+button{
+  margin: 5vh;
+}
+
+nav{
+  cursor: pointer;
+}
+
+#cuerpo{
+  margin-top: 13vh;
+  margin-left: 5vh;
+  margin-right: 5vh;
+  margin-bottom: 9vh;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+pre{
+  font-family: "Roboto", "Segoe UI", Tahoma, Geneva, sans-serif;
+}
+
+.izquierda,
+.derecha {
+  flex: 1; /* Cada hijo ocupará la mitad del ancho */
+  min-width: 430px;
+}
+
+#cuerpo div div{
+  margin: 1vh;
+}
+
+footer.buttons{
+  padding: 1vh;
+  min-height: 0vh;
+}
+
+/* Inicio izquierda */
+.codigo{
+  background-color: rgb(19, 19, 19);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  /* width: 100%; */
+  border-radius: 15px;
+}
+
+.cyan-line {
+  border: none; /* Elimina el estilo de borde predeterminado */
+  border-top: 2px solid cyan; /* Define una línea superior de color cyan y grosor de 2px */
+  width: 100%; /* Puedes ajustar el ancho según lo desees */
+  margin: 0px;
+}
+
+#cuerpo div .lineas{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  width: 100%;
+  margin: 0;
+  margin-top: 2vh;
+  margin-bottom: 2vh;
+  font-family: "Roboto", "Segoe UI", Tahoma, Geneva, sans-serif;
+}
+
+.line{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+  margin: 0px !important;
+}
+
+div.line {
+  font-size: clamp(25px, 2vh, 40px);
+  width: 100%;
+  justify-content: flex-start;
+}
+
+div.izquierda div.codigo div.lineas div.line.selectedLine pre.code{
+  border: 2px solid orange;
+}
+
+div.izquierda div.codigo div.lineas div.line.selectedLine pre.number{
+  color: rgb(255, 130, 0);
+}
+
+/* Evitar scroll bar */
+pre.number {
+  overflow: hidden;
+}
+
+
+div.line pre.number{
+  padding-left: 2vh;
+}
+
+div.line pre.code{
+  width: 100%;
+  text-align: left;
+  padding: .2vh;
+}
+
+div.line pre{
+  margin-bottom: .5vh;
+}
+
+#cuerpo div div.contador{
+  margin-bottom: 0vh;
+}
+
+#cuerpo div.izquierda div.contador div.lineas{
+  margin-bottom: 0vh;
+}
+
+.contador .lineas .line{
+  width: 100%;
+  justify-content: flex-start;
+}
+
+pre.number{
+  margin-right: 2vh;
+  margin-left: 1vh;
+  color: rgb(236, 236, 236)
+}
+
+.contador .lineas .line pre{
+  margin: 0;
+}
+
+.contador .lineas .line pre[id^="counter"]{
+  padding-right: 2vh;
+  flex-grow: 1;
+  text-align: right;
+}
+
+.codigo h2.title{
+  font-size: 3vh;
+  padding: 2vh;
+  margin: 0vh;
+  color: rgb(248, 248, 248)
+}
+
+/* Tipos compilador */
+.var{
+  color: #9cdcfe;
+}
+
+.rWord{
+  color: #569cd6;
+}
+
+.funcion{
+  color: #dcdcaa;
+}
+
+.numero{
+  color: #c0d5a8;
+}
+
+.p1{
+  color: #e5e528;
+}
+
+.p2{
+  color: #b2c;
+}
+
+.p3{
+  color: #90c8e6;
+}
+
+.oper{
+  color: #e9e4e4
+}
+.derecha .examen button{
+  margin: 1vh;
+}
+/* selected */
+pre.code.selected{
+  color: rgb(20, 20, 20);
+  background-color: rgb(236, 234, 234);
+  border-radius: 5px;
+}
+/* Fin Tipos compilador */
+/* Fin izquierda */
+
+/* Inicio derecha */
+/* N Value*/
+.datos{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 2vh;
+}
+
+.datos button{
+  margin: 2vh;
+  width: 5.15%;
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+  min-width: 30px;
+  border: none;
+  cursor: pointer;
+}
+
+button i{
+  color: rgb(230, 230, 230);
+  font-size: max(12px, 175%);
+}
+
+  /* actions */
+.datos button:hover{
+  transition: transform 0.8s ease-in-out;
+  transform: scale(1.1);
+}
+
+.datos button:active{
+  filter: brightness(1.5); /* Aumenta el brillo */
+  transition: filter 0.3s ease-in-out;
+  box-shadow: 0 0 3px 1px rgba(255, 255, 255, 0.8); /* Ajustar color respecto a botón */
+  transition: box-shadow 0.15s ease-in-out;
+}
+
+.datos button:hover i{
+  animation: pulse 1.5s infinite ease-in-out;
+}
+
+.datos button:active i {
+  animation-play-state: paused;
+}
+
+.datos p{
+  font-size: clamp(25px, 3vh, 40px);
+  margin-top: 1em;
+}
+
+.datos p input{
+  background-color: rgba(202, 202, 202, 0.372);
+  font-size: clamp(25px, 3vh, 40px);
+  border-color: rgba(255, 255, 255, 0);
+  color: rgb(70, 70, 70);
+  width: clamp(75px, 9vh, 120px);
+  border-radius: 5px;
+}
+
+.datos p input:focus {
+  outline: none;
+}
+
+/* Eliminar flechas horribles - default css */
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+span.space{
+  margin-left: 2vh;
+}
+/* Fin N Value */
+
+/* Números */
+.valores#valoresAlg{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.valores#valoresAlg div.divGeneralNumber div.positionDiv{
+  color: lightgray;
+  text-shadow:
+    0 1px 2px rgba(0,0,0,0.8),
+    0 0 4px rgba(0,0,0,0.6);
+  background-color: rgba(255, 255, 255, 0.05);
+  margin: .5vh;
+}
+
+.valores#valoresAlg div.divGeneralNumber div.i_Div{
+  min-height: 2vh;
+  margin: 0vh;
+}
+
+.valores#valoresAlg div.divGeneralNumber div.max_Div{
+  min-height: 2.5vh;
+  container-type: size;
+  margin: 0vh;
+}
+
+.valores#valoresAlg div.divGeneralNumber div.j_Div{
+  min-height: 2vh;
+  margin: 0vh;
+}
+
+.valores#valoresAlg div.divGeneralNumber div.i_Div div.iPointer{
+  width: 100%;
+  height: 100%;
+  background: orange;
+  margin: 0vh;
+
+  clip-path: polygon(0% 0%, 100% 0%, 50% 100%);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+
+.valores#valoresAlg div.divGeneralNumber div.max_Div div.maxPointer{
+  width: 100%;
+  min-height: 2.5vh;
+  height: 100%;
+  background: orange;
+  margin: 0vh;
+  font-size: 26cqw;
+
+  clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.valores#valoresAlg div.divGeneralNumber div.j_Div div.jPointer{
+  width: 100%;
+  height: 100%;
+  background: orange;
+  margin: 0vh;
+
+  clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.valores#valoresAlg div.divGeneralNumber div.j_Div{
+  min-height: 1.5vh;
+  margin: 0vh;
+  margin-bottom: .2vh;
+}
+
+.valores#valoresAlg div.divGeneralNumber div.numeroAlg {
+  background-color: rgba(202, 202, 202, 0.372);
+  height: 4.6vh;
+  width: 4.6vh;        /* mismo valor que la altura */
+  border-radius: 50%;
+  margin: 5px;
+  font-size: 2.1vh;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+/* Fin Números */
+/* Fin derecha */
+
+/* media queries */
+@media (max-width: 760px) {
+  button{
+    margin-left: 3.5vh;
+  }
+
+  #cuerpo{
+    margin-left: 3vh;
+    margin-right: 3vh;
+  }
+
+  #cuerpo div div{
+    margin: .7vh;
+  }
+}
+
+@media (max-width: 480px) {
+  button{
+    margin-left: 1vh;
+  }
+
+  .title{
+    font-size: 5vh;
+    padding: 2vh;
+    font-family: 'Roboto', sans-serif;
+  }
+
+  #cuerpo div div{
+    margin: .5vh;
+  }
+
+  .datos button{
+    width: 3vh;
+  }
+}
+
+@media (max-width: 339px) {
+  #cuerpo{
+    margin-left: 1vh;
+    margin-right: 1vh;
+  }
+
+  #cuerpo div div{
+    margin: 0vh;
+  }
+}
+/* fin media queries */
+
+/* importados */
+  /* exit buton */
+  /* From Uiverse.io by vinodjangid07 */ 
+  .Btn {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 60px;
+    height: 60px;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition-duration: .3s;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.199);
+    background-color: #C41E3A;
+  }
+
+  /* plus sign */
+  .sign {
+    width: 100%;
+    transition-duration: .3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .sign svg {
+    width: 25px;
+  }
+
+  .sign svg path {
+    fill: white;
+  }
+  
+  /* text */
+  .text {
+    position: relative;
+    right: 0%;
+    width: 0%;
+    opacity: 0;
+    color: white;
+    font-size: 1.2em;
+    font-weight: 600;
+    transition-duration: .3s;
+  }
+
+  /* hover effect on button width */
+  .Btn:hover {
+    width: 125px;
+    border-radius: 40px;
+    transition-duration: .3s;
+  }
+
+  .Btn:hover .sign {
+    width: 30%;
+    transition-duration: .3s;
+    padding-left: 20px;
+  }
+  /* hover effect button's text */
+  .Btn:hover .text {
+    opacity: 1;
+    width: 70%;
+    transition-duration: .3s;
+    padding-right: 10px;
+  }
+  /* button click effect*/
+  .Btn:active {
+    transform: translate(2px ,2px);
+  }
+  /* fin exit buton */
+
+  /* Button footer */
+  /* From Uiverse.io by adamgiebl */ 
+  .cssbuttons-io-button {
+    margin: 1vh;
+    /* background: especifico para cada pagina; */
+    /* Cambiar cada pagina:
+    box-shadow: inset 0 0 1.6em -0.6em #714da6; */
+    color: white;
+    font-family: inherit;
+    padding: 0.35em;
+    padding-left: 1.2em;
+    font-size: max(22px,1.8vh);
+    font-weight: 500;
+    border-radius: 0.9em;
+    border: none;
+    letter-spacing: 0.05em;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    position: relative;
+    height: 2.8em;
+    padding-right: 3.3em;
+    cursor: pointer;
+  }
+
+  .cssbuttons-io-button .icon {
+    background: white;
+    margin-left: 1em;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 2.2em;
+    width: 2.2em;
+    border-radius: 0.7em;
+    /* Especifico para cada pagina:
+    box-shadow: 0.1em 0.1em 0.6em 0.2em #7b52b9; */
+    right: 0.3em;
+    transition: all 0.3s;
+  }
+
+  .cssbuttons-io-button:hover .icon {
+    width: calc(100% - 0.6em);
+  }
+
+  .cssbuttons-io-button .icon svg {
+    height: clamp(4vh, 24px, 8vh);
+    width: 1.1em;
+    transition: transform 0.3s;
+    /* color: especifico cada pagina; */
+  }
+
+  .cssbuttons-io-button:hover .icon svg {
+    transform: translateX(0.1em);
+  }
+
+  .cssbuttons-io-button:active .icon {
+    transform: scale(0.95);
+  }
+
+  /* Responsive adjustments for screens below 768px */
+  @media (max-width: 768px) {
+    .cssbuttons-io-button {
+      font-size: 20px; /* Increase font size */
+      padding: 0.5em 1.5em; /* Adjust padding */
+      height: 3.5em; /* Increase button height */
+    }
+
+    .cssbuttons-io-button .icon {
+      height: 2.8em; /* Increase icon height */
+      width: 2.8em; /* Increase icon width */
+      border-radius: 0.9em; /* Adjust border radius */
+    }
+
+    .cssbuttons-io-button .icon svg {
+      width: 1.4em; /* Increase icon size */
+    }
+  }
+  /* End Button footer */
+
+  /* Boton examen */
+  /* From Uiverse.io by Creatlydev */ 
+  .button {
+    line-height: 1;
+    text-decoration: none;
+    display: inline-flex;
+    border: none;
+    cursor: pointer;
+    align-items: center;
+    gap: 0.75rem;
+    /* background-color: var(--clr_Exam); */
+    color: #fff;
+    border-radius: 10rem;
+    font-weight: 600;
+    font-size: clamp(24px,2.6vh,120px);
+    padding: 0.75rem 1.5rem;
+    padding-left: 20px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transition: background-color 0.3s;
+  }
+
+  .button__icon-wrapper {
+    flex-shrink: 0;
+    width: max(25px, 2.8vh);
+    height: max(25px, 2.8vh);
+    position: relative;
+    /* color: var(--clr_Exam); */
+    background-color: #fff;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+  }
+
+  .button:hover {
+    background-color: #000;
+  }
+
+  .button:hover .button__icon-wrapper {
+    color: #000;
+  }
+
+  .button__icon-svg--copy {
+    position: absolute;
+    transform: translate(-150%, 150%);
+  }
+
+  .button:hover .button__icon-svg:first-child {
+    transition: transform 0.3s ease-in-out;
+    transform: translate(150%, -150%);
+  }
+
+  .button:hover .button__icon-svg--copy {
+    transition: transform 0.3s ease-in-out 0.1s;
+    transform: translate(0);
+  }
+  /* Fin Boton examen */
+/* fin importados */
+
+/* My anaimation */
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.15);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+/* End my animation */

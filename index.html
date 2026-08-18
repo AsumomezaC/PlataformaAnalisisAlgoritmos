@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Menu</title>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/styles/menu.css">
+  <link rel="stylesheet" href="/styles/main.css">
+  <link rel="stylesheet" href="/styles/personalInfo.css">
+</head>
+<body>
+  <div id="Presentacion">
+    <h1>BIENVENIDO</h1>
+    <div>
+      <h3>¿Qué algoritmo quieres repasar?</h3>
+      <div id = "seleccion">
+        <select id="algoritmos">
+          <option id="Default">Selecciona una opción</option>
+          <option id="Insertion">Insertion Sort</option>
+          <option id="Bubble">Bubble Sort</option>
+          <option id="Find">Find Max</option>
+        </select>
+      </div>
+      <div class="center">
+        <button class="animated-button" id="continue" onclick="Redireccionar()">
+          <svg viewBox="0 0 24 24" class="arr-2" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"
+            ></path>
+          </svg>
+          <span class="text">Continuar</span>
+          <span class="circle"></span>
+          <svg viewBox="0 0 24 24" class="arr-1" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"
+            ></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="extraInfo">
+    <!-- From Uiverse.io by alexruix  -->
+    <div class="card">
+      <div class="card-info">
+      <div class="card-avatar"><img src="/imagenes/miFoto.jpg" alt="fotoProgramador"></div>
+      <div class="card-title">Adrián Cuevas</div>
+      <div class="card-subtitle">Programador</div>
+    </div>
+        <ul class="card-social">
+          <li class="card-social__item">
+          <a href="https://www.facebook.com/profile.php?viewas=100000686899395&id=100006606107422" target="_blank" rel="noopener noreferrer">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M14 9h3l-.375 3H14v9h-3.89v-9H8V9h2.11V6.984c0-1.312.327-2.304.984-2.976C11.75 3.336 12.844 3 14.375 3H17v3h-1.594c-.594 0-.976.094-1.148.281-.172.188-.258.5-.258.938V9z"></path>
+          </svg></a></li>
+
+          <li class="card-social__item">
+          <a href="https://www.instagram.com/adrianfernando5/" target="_blank" rel="noopener noreferrer">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 2.163c3.221 0 3.614.012 4.891.07 1.177.056 1.78.245 2.192.413.511.197.877.437 1.261.821.384.384.624.75.821 1.261.168.412.357 1.015.413 2.192.058 1.277.07 1.67.07 4.891s-.012 3.614-.07 4.891c-.056 1.177-.245 1.78-.413 2.192a3.438 3.438 0 0 1-.821 1.261c-.384.384-.75.624-1.261.821-.412.168-1.015.357-2.192.413-1.277.058-1.67.07-4.891.07s-3.614-.012-4.891-.07c-1.177-.056-1.78-.245-2.192-.413a3.438 3.438 0 0 1-1.261-.821 3.438 3.438 0 0 1-.821-1.261c-.168-.412-.357-1.015-.413-2.192-.058-1.277-.07-1.67-.07-4.891s.012-3.614.07-4.891c.056-1.177.245-1.78.413-2.192.197-.511.437-.877.821-1.261a3.438 3.438 0 0 1 1.261-.821c.412-.168 1.015-.357 2.192-.413 1.277-.058 1.67-.07 4.891-.07zM12 0C8.741 0 8.332.012 7.052.07 5.771.128 4.798.318 4.025.531a5.978 5.978 0 0 0-2.108 1.09A5.978 5.978 0 0 0 .531 4.025c-.213.773-.403 1.746-.461 3.027C0 8.332 0 8.741 0 12s.012 3.668.07 4.948c.058 1.281.248 2.254.461 3.027a5.978 5.978 0 0 0 1.09 2.108 5.978 5.978 0 0 0 2.108 1.09c.773.213 1.746.403 3.027.461C8.332 24 8.741 24 12 24s3.668-.012 4.948-.07c1.281-.058 2.254-.248 3.027-.461a5.978 5.978 0 0 0 2.108-1.09 5.978 5.978 0 0 0 1.09-2.108c.213-.773.403-1.746.461-3.027.058-1.281.07-1.69.07-4.948s-.012-3.668-.07-4.948c-.058-1.281-.248-2.254-.461-3.027a5.978 5.978 0 0 0-1.09-2.108A5.978 5.978 0 0 0 19.075.531c-.773-.213-1.746-.403-3.027-.461C15.668.012 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zm0 10.162a3.999 3.999 0 1 1 0-8 3.999 3.999 0 0 1 0 8zm6.406-12.595a1.44 1.44 0 1 1 0 2.88 1.44 1.44 0 0 1 0-2.88z"></path>
+          </svg></a></li>
+
+          <li class="card-social__item">
+          <a href="https://www.linkedin.com/in/cuevas-solis-adrian-fernando/" target="_blank" rel="noopener noreferrer">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M19.547 3c.406 0 .75.133 1.031.398.281.266.422.602.422 1.008v15.047c0 .406-.14.766-.422 1.078a1.335 1.335 0 0 1-1.031.469h-15c-.406 0-.766-.156-1.078-.469C3.156 20.22 3 19.86 3 19.453V4.406c0-.406.148-.742.445-1.008C3.742 3.133 4.11 3 4.547 3h15zM8.578 18V9.984H6V18h2.578zM7.36 8.766c.407 0 .743-.133 1.008-.399a1.31 1.31 0 0 0 .399-.96c0-.407-.125-.743-.375-1.009C8.14 6.133 7.813 6 7.406 6c-.406 0-.742.133-1.008.398C6.133 6.664 6 7 6 7.406c0 .375.125.696.375.961.25.266.578.399.984.399zM18 18v-4.688c0-1.156-.273-2.03-.82-2.624-.547-.594-1.258-.891-2.133-.891-.938 0-1.719.437-2.344 1.312V9.984h-2.578V18h2.578v-4.547c0-.312.031-.531.094-.656.25-.625.687-.938 1.312-.938.875 0 1.313.578 1.313 1.735V18H18z"></path>
+          </svg></a></li>
+        </ul>
+      <a href="https://www.instagram.com/alexaramirez306/" target="_blank" rel="noopener noreferrer">
+        <div class="agradecimientos">Agradecimientos: Alexa Ramirez</div>
+      </a>
+    </div>
+  </div>
+  <script src="/funciones/menu.js"></script>
+</body>
+</html>

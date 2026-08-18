@@ -1,0 +1,124 @@
+::selection {
+  background-color: #15ad96; /* Color de fondo */
+  color: white;          /* Color del texto */
+}
+
+:root {
+  --clr_Exam: #184026;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  background: url('../../imagenes/algoritmos/insertion.jpg') center/cover no-repeat fixed;
+  color: #ffffff;
+  font-family: 'Roboto', sans-serif;
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center;
+  align-items: center; */
+  text-align: center;
+}
+
+header {
+  background-color: #0979685c;
+}
+
+#cuerpo div div.contador{
+  background-color: #0e691d62;
+  margin-top: 5%;
+  margin-left: 1vh;
+  padding: 1%;
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  /* width: 100%; */
+}
+
+#cuerpo div.izquierda div.contador div.lineas div.line pre.counter{
+  color: rgb(237, 237, 237);
+}
+
+/* Derecha */
+.derecha .datos p{
+  color: rgb(235, 235, 235);
+  text-shadow: 2px 2px 5px rgb(28, 28, 28);
+}
+/* n Value */
+
+.datos button.lessNBtn{
+  background-color: rgb(36, 67, 220);
+  border-color: rgb(90, 43, 234);
+}
+
+.datos button.moreNBtn{
+  background-color: rgb(202, 32, 32);
+  border-color: rgb(207, 21, 21);
+}
+
+.datos p input{
+  background-color: rgba(202, 202, 202, 0.42);
+  border-color: rgba(255, 255, 255, 0);
+  color: rgb(80, 80, 80);
+
+}
+/* Fin n Value */
+
+/* Colores valores Alg */
+.valores#valoresAlg div.divGeneralNumber div.numeroAlg.color0 {
+  background-color: #041811;
+}
+
+.valores#valoresAlg div.divGeneralNumber div.numeroAlg.color1 {
+  background-color: #0B3A22;
+}
+
+.valores#valoresAlg div.divGeneralNumber div.numeroAlg.color2 {
+  background-color: #15683A;
+}
+
+.valores#valoresAlg div.divGeneralNumber div.numeroAlg.color3 {
+  background-color: #4BA35F;
+}
+.valores#valoresAlg div.divGeneralNumber div.numeroAlg.color4 {
+  background-color: #BFA83A;
+}
+/* Fin Colores valores Alg */
+
+/* Fin derecha */
+
+footer {
+  background-color: rgba(37, 37, 37, 0.5) !important;
+}
+
+footer.buttons{
+  background-color: #f0f0f000;
+}
+
+/* Footer especific button */
+.cssbuttons-io-button{
+  background: #0e5827;
+  box-shadow: inset 0 0 1.6em -0.6em #188b3e;
+}
+
+.cssbuttons-io-button .icon{
+  box-shadow: 0.1em 0.1em 0.6em 0.2em #0b491f;
+}
+
+.cssbuttons-io-button .icon svg{
+  color: #0b491f;
+}
+/* End Footer especific button */
+
+/* Exam especific button */
+.button {
+  background-color: var(--clr_Exam);
+}
+
+.button__icon-wrapper {
+  color: var(--clr_Exam);
+}
+/* Fin Exam especific button */

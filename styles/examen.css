@@ -1,0 +1,540 @@
+::selection {
+  background-color: rgb(152, 152, 152); /* Color de fondo */
+  color: white;          /* Color del texto */
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  background: url('/imagenes/test.jpg') center/cover no-repeat fixed;
+  color: gray;
+  font-family: 'Roboto', sans-serif;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+#logout, #check, #new{
+  margin-top: 5px;
+}
+
+header.Name{
+  cursor: pointer;
+}
+
+/* Inicio Información extra*/
+.informacionExtra{
+  margin-top: 13vh;
+  margin-left: 5vh;
+  margin-right: 5vh;
+  background-color: rgba(250, 250, 250, 0.8);
+  border-radius: 15px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch; /* hace que los hijos se igualen en altura cuando están en fila */
+}
+
+/* Hijos directos: ocupan ~50% cada uno en fila */
+.informacionExtra > div{
+  box-sizing: border-box;
+  flex: 1 1 50%;     /* crecer | encoger | base 50% */
+  min-width: 260px;  /* opcional: evita que se encojan demasiado antes de hacer wrap */
+  min-height: 0;     /* importante para permitir que los hijos se comporten dentro de flex */
+}
+
+/* Inicio Pseudocódigo */
+.informacionExtra > .codigo{
+  padding-right: 1vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  border-radius: 15px;
+  background-color: rgb(25, 25, 25);
+}
+
+/* título dentro de código */
+.codigo h2.title{
+  font-size: 3vh;
+  padding: 2vh;
+  margin: 0vh;
+  color: rgb(248, 248, 248);
+}
+
+.cyan-line {
+  border: none; /* Elimina el estilo de borde predeterminado */
+  border-top: 2px solid cyan; /* Define una línea superior de color cyan y grosor de 2px */
+  width: 100%;
+  margin: 0px;
+}
+
+pre.number{
+  margin-right: 2vh;
+  margin-left: 1vh;
+  color: rgb(236, 236, 236);
+}
+
+/* si #cuerpo es diferente fuera de .informacionExtra, mantenlo; si está dentro, está bien también */
+#cuerpo div .lineas{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  width: 100%;
+  margin: 0;
+  margin-top: 2vh;
+  margin-bottom: 2vh;
+}
+
+.line{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+  margin: 0px !important;
+}
+
+div.line {
+  font-size: clamp(25px, 2vh, 40px);
+  width: 100%;
+  justify-content: flex-start;
+}
+
+/* Inicio Tipos Compilador */
+.var{
+  color: #9cdcfe;
+}
+
+.rWord{
+  color: #569cd6;
+}
+
+.funcion{
+  color: #dcdcaa;
+}
+
+.numero{
+  color: #c0d5a8;
+}
+
+.p1{
+  color: #e5e528;
+}
+
+.p2{
+  color: #b2c;
+}
+
+.p3{
+  color: #90c8e6;
+}
+
+.oper{
+  color: #e9e4e4;
+}
+/* Fin Tipos Compilador */
+/* Fin Pseudocódigo */
+
+/* Inicio Calificación - hijo directo, sin alturas que rompan el stretch */
+.informacionExtra > .calificacion{
+  padding-left: 1vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: clamp(25px, 2.5vh, 120px);
+  align-self: stretch; /* refuerzo: que este hijo se estire si el padre lo pide */
+  min-height: 0;       /* evita problemas con contenido interno en flex */
+}
+
+.informacionExtra > .calificacion > #calificacion{
+  font-size: clamp(25px, 4vh, 160px);
+  color: rgb(63, 63, 63);
+}
+/* Fin Calificación */
+/* Fin Información extra */
+
+/* Inicio Preguntas */
+#Preguntas{
+  padding: .5vh;
+  border-radius: 15px;
+  margin-top: 5vh;
+  margin-left: 5vh;
+  margin-right: 5vh;
+  margin-bottom: 9vh;
+  background-color: rgba(245, 245, 245, 0.93);
+}
+
+#Preguntas div{
+  margin: 2vh;
+}
+
+#Preguntas div h2{
+  font-size: 3vh;
+  color: #646464;
+}
+
+#Preguntas div label{
+  font-size: 2.5vh;
+  color: #767676
+}
+
+#Preguntas div input{
+  margin-right: 1vh;
+}
+
+input[type="radio"] {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #aaa;
+  border-radius: 50%;
+  outline: none;
+  cursor: pointer;
+  margin-right: 10px;
+  position: relative;
+  vertical-align: middle;
+}
+
+/* Estilo para cuando el radio button está seleccionado */
+input[type="radio"]:checked {
+  background-color: white;
+  border-color: rgb(111, 111, 111);
+}
+
+/* Estilo para el círculo interior cuando está seleccionado */
+input[type="radio"]:checked::before {
+  content: "";
+  display: block;
+  width: 10px;
+  height: 10px;
+  background-color: rgb(0, 50, 0);
+  border-radius: 50%;
+  position: absolute;
+  top: 3px;
+  left: 3px;
+}
+
+/* Estilo para hover */
+input[type="radio"]:hover {
+  border-color: #002a56;
+}
+
+/* Estilo para el label que contiene el radio button */
+label {
+  cursor: pointer;
+}
+
+.correcta {
+  background-color: rgba(0, 128, 0, 0.7);
+  border-radius: 10px;
+  padding-left: 5px;
+  padding-right: 5px;
+  padding-bottom: 1px;
+  color: #4d4d4d !important;
+}
+
+.incorrecta {
+  background-color: rgba(255, 0, 0, 0.7);
+  border-radius: 10px;
+  padding-left: 5px;
+  padding-right: 5px;
+  padding-bottom: 1px;
+  color: #4d4d4d !important;
+}
+
+/* Fin Preguntas */
+
+header{
+  justify-content: center; /* Center the text horizontally */
+}
+
+footer{
+  background-color: rgba(169, 169, 169, 0.5);
+}
+
+footer div{
+  flex: 1 1 auto;
+}
+
+div#logout {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 2px;
+}
+
+.Examen{
+  height: 5vh;
+  font-size: 3vh;
+  background-color: #f0f0f07c;
+}
+
+.Name{
+  top: 5vh;
+  height: 7vh;
+  font-size: 5vh;
+  background-color: #f0f0f0e4;
+}
+
+a:hover {
+  color: white;
+  text-decoration: none;
+}
+
+/* media queries */
+@media (max-width: 760px) {
+  #Preguntas{
+    margin-left: 3vh;
+    margin-right: 3vh;
+    margin-bottom: 18vh;
+  }
+
+  #Preguntas div label{
+    font-size: 2.8vh;
+  }
+}
+
+@media (max-width: 339px) {
+  #Preguntas{
+    margin-left: 1vh;
+    margin-right: 1vh;
+    margin-bottom: 27vh;
+  }
+}
+/* fin media queries */
+
+/* importados */
+  /* boton refrescar */
+  /* From Uiverse.io by JaydipPrajapati1910 */ 
+  .button {
+    color: white;
+    background-color: #222;
+    font-weight: 500;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    line-height: 2rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    padding-top: 0.7rem;
+    padding-bottom: 0.7rem;
+    cursor: pointer;
+    text-align: center;
+    margin-right: 0.5rem;
+    display: inline-flex;
+    align-items: center;
+    border: none;
+  }
+
+  .button:hover {
+    background-color: #333;
+  }
+
+  .button svg {
+    display: inline;
+    width: 1.3rem;
+    height: 1.3rem;
+    color: white;
+  }
+
+  .button:hover svg {
+    animation: spin_357 0.5s linear;
+  }
+
+  @keyframes spin_357 {
+    from {
+      transform: rotate(0deg);
+    }
+
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  /* fin boton refrescar */
+  /* calificar */
+  /* From Uiverse.io by Li-Deheng */ 
+  .btn-conteiner {
+    display: flex;
+    justify-content: center;
+    --color-text: #ffffff;
+    --color-background: #008000;
+    --color-outline: #00800080;
+    --color-shadow: #00000080;
+  }
+
+  .btn-content {
+    display: flex;
+    align-items: center;
+    padding: 0px 30px;
+    text-decoration: none;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 28px;
+    color: var(--color-text);
+    background: var(--color-background);
+    transition: 1s;
+    border-radius: 100px;
+    box-shadow: 0 0 0.2em 0 var(--color-background);
+  }
+
+  .btn-content:hover, .btn-content:focus {
+    transition: 0.5s;
+    -webkit-animation: btn-content 1s;
+    animation: btn-content 1s;
+    outline: 0.1em solid transparent;
+    outline-offset: 0.2em;
+    box-shadow: 0 0 0.4em 0 var(--color-background);
+  }
+
+  .btn-content .icon-arrow {
+    transition: 0.5s;
+    margin-right: 0px;
+    transform: scale(0.6);
+  }
+
+  .btn-content:hover .icon-arrow {
+    transition: 0.5s;
+    margin-right: 25px;
+  }
+
+  .icon-arrow {
+    width: 20px;
+    margin-left: 15px;
+    position: relative;
+  }
+    
+  /* SVG */
+  #arrow-icon-one {
+    transition: 0.4s;
+    transform: translateX(-60%);
+  }
+
+  #arrow-icon-two {
+    transition: 0.5s;
+    transform: translateX(-30%);
+  }
+
+  .btn-content:hover #arrow-icon-three {
+    animation: color_anim 1s infinite 0.2s;
+  }
+
+  .btn-content:hover #arrow-icon-one {
+    transform: translateX(0%);
+    animation: color_anim 1s infinite 0.6s;
+  }
+
+  .btn-content:hover #arrow-icon-two {
+    transform: translateX(0%);
+    animation: color_anim 1s infinite 0.4s;
+  }
+
+  .bi-arrow-repeat{
+    margin: 0px;
+    padding: 0px;
+  }
+
+  /* SVG animations */
+  @keyframes color_anim {
+    0% {
+      fill: white;
+    }
+
+    50% {
+      fill: var(--color-background);
+    }
+
+    100% {
+      fill: white;
+    }
+  }
+
+  /* Button animations */
+  @-webkit-keyframes btn-content {
+    0% {
+      outline: 0.2em solid var(--color-background);
+      outline-offset: 0;
+    }
+  }
+
+  @keyframes btn-content {
+    0% {
+      outline: 0.2em solid var(--color-background);
+      outline-offset: 0;
+    }
+  }
+  /* fin calificar */
+
+  /* exit buton */
+  /* From Uiverse.io by vinodjangid07 */ 
+  .Btn {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 45px;
+    height: 45px;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition-duration: .3s;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.199);
+    background-color: #ad1e36;
+  }
+
+  /* plus sign */
+  .sign {
+    width: 100%;
+    transition-duration: .3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .sign svg {
+    width: 17px;
+  }
+
+  .sign svg path {
+    fill: white;
+  }
+  
+  /* text */
+  .text {
+    position: relative;
+    right: 0%;
+    width: 0%;
+    opacity: 0;
+    color: white;
+    font-size: 1.2em;
+    font-weight: 600;
+    transition-duration: .3s;
+  }
+
+  /* hover effect on button width */
+  .Btn:hover {
+    width: 125px;
+    border-radius: 40px;
+    transition-duration: .3s;
+  }
+
+  .Btn:hover .sign {
+    width: 30%;
+    transition-duration: .3s;
+    padding-left: 20px;
+  }
+  /* hover effect button's text */
+  .Btn:hover .text {
+    opacity: 1;
+    width: 70%;
+    transition-duration: .3s;
+    padding-right: 10px;
+  }
+  /* button click effect*/
+  .Btn:active {
+    transform: translate(2px ,2px);
+  }
+  /* fin exit buton */
+/* fin importados */

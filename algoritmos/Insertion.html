@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Algoritmo Insertion Sort</title>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="../styles/main.css">
+  <link rel="stylesheet" href="../styles/algoritmos/General.css">
+  <link rel="stylesheet" href="../styles/algoritmos/Insertion.css">
+</head>
+<body>
+  <header>
+    <nav class="title" onclick="ViewInfo()">Insertion Sort</nav>
+
+    <!-- From Uiverse.io by vinodjangid07  -->
+    <button class="Btn" onclick="ReturnMenu()">
+      <div class="sign"><svg viewBox="0 0 512 512"><path d="M377.9 105.9L500.7 228.7c7.2 7.2 11.3 17.1 11.3 27.3s-4.1 20.1-11.3 27.3L377.9 406.1c-6.4 6.4-15 9.9-24 9.9c-18.7 0-33.9-15.2-33.9-33.9l0-62.1-128 0c-17.7 0-32-14.3-32-32l0-64c0-17.7 14.3-32 32-32l128 0 0-62.1c0-18.7 15.2-33.9 33.9-33.9c9 0 17.6 3.6 24 9.9zM160 96L96 96c-17.7 0-32 14.3-32 32l0 256c0 17.7 14.3 32 32 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-64 0c-53 0-96-43-96-96L0 128C0 75 43 32 96 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32z"></path></svg></div>
+      <div class="text">Atrás</div>
+    </button>
+  </header>
+
+  <div id="cuerpo">
+    <div class="izquierda">
+      <div class="codigo">
+        <h2 class="title">
+         Pseudocódigo
+        </h2>
+        <hr class="cyan-line">
+        <div class="lineas">
+          <div class="line" id="codeLine1">
+            <pre class="number">1</pre>
+            <pre class="code"><span class="rWord">for</span> <span class="var">i</span> <span class="oper">=</span> <span class="numero">2</span> <span class="rWord">to</span> <span class="var">N</span> <span class="rWord">do</span></pre>
+           </div>
+           <div class="line" id="codeLine2">
+            <pre class="number">2</pre>
+            <pre class="code">    <span class="var">v</span> <span class="oper">=</span> <span class="var">a</span><span class="p1">[</span><span class="var">i</span><span class="p1">]</span></pre>
+           </div> 
+           <div class="line" id="codeLine3">
+            <pre class="number">3</pre>
+            <pre class="code">    <span class="var">j</span> <span class="oper">=</span> <span class="var">i</span><span class="oper">-</span><span class="numero">1</span></pre>
+           </div>
+           <div class="line" id="codeLine4">
+            <pre class="number">4</pre>
+            <pre class="code">    <span class="rWord">while</span> <span class="var">a</span><span class="p1">[</span><span class="var">j</span><span class="p1">]</span> <span class="oper">></span> <span class="var">v</span> <span class="rWord">AND</span> <span class="var">j</span> <span class="oper">></span> <span class="numero">0</span> <span class="rWord">do</span></pre>
+           </div>
+           <div class="line" id="codeLine5">
+            <pre class="number">5</pre>
+            <pre class="code">        <span class="var">a</span><span class="p1">[</span><span class="var">j</span><span class="oper">+</span><span class="numero">1</span><span class="p1">]</span> <span class="oper">=</span> <span class="var">a</span><span class="p1">[</span><span class="var">j</span><span class="p1">]</span></pre>
+           </div> 
+           <div class="line" id="codeLine6">
+            <pre class="number">6</pre>
+            <pre class="code">        <span class="var">j</span> <span class="oper">=</span> <span class="var">j</span><span class="oper">-</span><span class="numero">1</span></pre>
+           </div> 
+           <div class="line" id="codeLine7">
+            <pre class="number">7</pre>
+            <pre class="code">    <span class="var">a</span><span class="p1">[</span><span class="var">j</span><span class="oper">+</span><span class="numero">1</span><span class="p1">]</span> <span class="oper">=</span> <span class="var">v</span></pre>
+           </div>  
+        </div>
+       </div>
+       <div class="contador">
+        <h2 class="contadorTitle">Número de Pasos</h2>
+        <hr class="grayDark-line2">
+        <div class="lineas">
+          <div class="line">
+            <pre class="number">
+              1
+            </pre>
+            <pre id="counter1" class="counter">
+              —
+            </pre>
+          </div>
+          <div class="line">
+            <pre class="number">
+              2
+            </pre>
+            <pre id="counter2" class="counter">
+              —
+            </pre>
+          </div>
+          <div class="line">
+            <pre class="number">
+              3
+            </pre>
+            <pre id="counter3" class="counter">
+              —
+            </pre>
+          </div>
+          <div class="line">
+            <pre class="number">
+              4
+            </pre>
+            <pre id="counter4" class="counter">
+              —
+            </pre>
+          </div>
+          <div class="line">
+            <pre class="number">
+              5
+            </pre>
+            <pre id="counter5" class="counter">
+              —
+            </pre>
+          </div>
+          <div class="line">
+            <pre class="number">
+              6
+            </pre>
+            <pre id="counter6" class="counter">
+              —
+            </pre>
+          </div>
+          <div class="line">
+            <pre class="number">
+              7
+            </pre>
+            <pre id="counter7" class="counter">
+              —
+            </pre>
+          </div>
+        </div>
+       </div>
+    </div>
+    <div class="derecha">
+      <div class="datos">
+        <button class ="lessNBtn"><i class="fa-solid fa-minus"></i></button>
+        <p class="nName">n = 
+          <input class="nValue" id="nValue" type="number" min="0" step="1" value="0">
+          </input>
+        </p>
+        <button class ="moreNBtn"><i class="fa-solid fa-plus"></i></button>
+        <p>
+          i = <span id="iValue">—</span>
+          <span class="space"></span>
+          j = <span id="jValue">—</span>
+          <span class="space"></span>
+          v = <span id="vValue">—</span>
+        </p>
+      </div>
+      <div class="valores" id="valoresAlg">
+  
+      </div>
+      <div class="examen">
+        <button onclick="IrExamen()" href="#" class="button">
+          <span class="button__icon-wrapper">
+            <svg
+              viewBox="0 0 14 15"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              class="button__icon-svg"
+              width="10"
+            >
+              <path
+                d="M13.376 11.552l-.264-10.44-10.44-.24.024 2.28 6.96-.048L.2 12.56l1.488 1.488 9.432-9.432-.048 6.912 2.304.024z"
+                fill="currentColor"
+              ></path>
+            </svg>
+
+            <svg
+              viewBox="0 0 14 15"
+              fill="none"
+              width="10"
+              xmlns="http://www.w3.org/2000/svg"
+              class="button__icon-svg button__icon-svg--copy"
+            >
+              <path
+                d="M13.376 11.552l-.264-10.44-10.44-.24.024 2.28 6.96-.048L.2 12.56l1.488 1.488 9.432-9.432-.048 6.912 2.304.024z"
+                fill="currentColor"
+              ></path>
+            </svg>
+          </span>
+          Ir a la evaluación
+        </button>
+      </div>
+    </div>
+  </div>
+  <footer class="buttons">
+      <div onclick="EjecutarTodo()">
+        <button class="cssbuttons-io-button">
+          Ejecutar
+          <div class="icon">
+            <svg
+              height="24"
+              width="24"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path d="M0 0h24v24H0z" fill="none"></path>
+              <path
+                d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z"
+                fill="currentColor"
+              ></path>
+            </svg>
+          </div>
+        </button>
+      </div>
+      <div onclick="EjecutarUnPaso()">
+        <button class="cssbuttons-io-button">
+          Paso a paso
+          <div class="icon">
+            <svg
+              height="24"
+              width="24"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path d="M0 0h24v24H0z" fill="none"></path>
+              <path
+                d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z"
+                fill="currentColor"
+              ></path>
+            </svg>
+          </div>
+        </button>
+      </div>
+  </footer>
+  <script src="/funciones/algGeneral.js"></script>
+  <script src="/funciones/Insertion.js"></script>
+</body>
+</html>
