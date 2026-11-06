@@ -208,3 +208,56 @@ p {
   opacity: 1;
 }
 /* fin boton continuar */
+/* Créditos institucionales (UAZ / COZCyT) y aviso de privacidad */
+.creditos {
+  position: fixed;
+  bottom: 2vw;
+  left: 2vw;
+  max-width: calc(100% - 4vw - 260px);
+  padding-left: 12px;
+  border-left: 3px solid rgb(221, 117, 221);
+  text-align: left;
+}
+
+.creditos-texto {
+  margin: 0;
+  max-width: none;
+  color: #ffffff;
+  font-size: 0.85em;
+  line-height: 1.5;
+  text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.creditos-texto abbr {
+  text-decoration: none;
+  font-weight: 700;
+  cursor: help;
+}
+
+.creditos-aviso {
+  display: inline-block;
+  margin-top: 4px;
+  color: rgb(240, 190, 240);
+  font-size: 0.75em;
+  text-decoration: underline;
+  text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.creditos-aviso:hover {
+  color: #ffffff;
+}
+
+@media (max-width: 768px) {
+  .creditos {
+    position: static;
+    max-width: 90%;
+    margin: 24px auto 300px;
+    padding-left: 0;
+    border-left: none;
+    text-align: center;
+  }
+
+  .creditos-texto br {
+    display: none;
+  }
+}
