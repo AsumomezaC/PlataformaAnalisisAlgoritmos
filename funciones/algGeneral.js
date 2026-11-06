@@ -199,6 +199,12 @@ function sleep(ms) {
 }
 
 function EjecutarUnPaso() {
+  // Ritmo con el que el usuario presiona "Paso a paso" (para la animación de fichas)
+  const ahora = performance.now();
+  intervaloManual = ultimoPasoManual ? ahora - ultimoPasoManual : 0;
+  if (intervaloManual > 2000) intervaloManual = 0; // pausa larga: velocidad normal
+  ultimoPasoManual = ahora;
+
   if(pasoActual === 0){
     ReiniciarValoresVisualesAlg();
     ResetAlgoritmo();
@@ -212,6 +218,7 @@ async function EjecutarTodo() {
   ResetAlgoritmo();
   let sleepTime = 2000;
   seguirEjecutando = true;
+  intervaloEjecucion = sleepTime;
   while (seguirEjecutando && SiguientePaso()) {
     await sleep(sleepTime);
     if (sleepTime <= 200){
@@ -219,11 +226,220 @@ async function EjecutarTodo() {
     } else{
       sleepTime*= .975;
     }
+    intervaloEjecucion = sleepTime;
   }
   seguirEjecutando = false;
 }
 
+// Inicio Animación de fichas
+// Cuando un valor cambia de lugar, su círculo se desliza como una ficha desde
+// la posición de origen. La duración se adapta al ritmo de los pasos:
+//  - "Ejecutar": usa el intervalo actual entre pasos (que se va acelerando).
+//  - "Paso a paso": usa el tiempo entre clics; si se presiona rápido, la ficha
+//    se mueve más rápido, y un clic nuevo termina al instante la animación anterior.
+const DURACION_FICHA_MAX = 650;
+const DURACION_FICHA_MIN = 90;
+let intervaloEjecucion = 0;
+let intervaloManual = 0;
+let ultimoPasoManual = 0;
+let animacionesFichas = [];
+
+function PrefiereMenosMovimiento() {
+  return window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+}
+
+function DuracionFicha() {
+  const intervalo = seguirEjecutando ? intervaloEjecucion : intervaloManual;
+  if (!intervalo) return DURACION_FICHA_MAX;
+  return Math.min(DURACION_FICHA_MAX, Math.max(DURACION_FICHA_MIN, intervalo * 0.6));
+}
+
+let fantasmasFichas = []; // copias temporales de fichas que vuelan hacia/desde una variable
+
+function TerminarAnimacionesFichas() {
+  animacionesFichas.forEach(anim => anim.finish());
+  animacionesFichas = [];
+  fantasmasFichas.forEach(f => f.remove());
+  fantasmasFichas = [];
+}
+
+function RegistrarAnimacionFicha(el, anim) {
+  el.classList.add('fichaEnMovimiento');
+  el._animFicha = anim;
+  animacionesFichas.push(anim);
+  anim.addEventListener('finish', () => {
+    if (el._animFicha === anim) el.classList.remove('fichaEnMovimiento');
+  });
+}
+
+// Mueve la ficha "el" desde donde está "origen" hasta su lugar, en arco.
+// arco > 0 pasa por arriba, arco < 0 pasa por abajo.
+function MoverFicha(el, origen, arco) {
+  if (!el || !origen || !el.animate || PrefiereMenosMovimiento()) return;
+  const a = origen.getBoundingClientRect();
+  const b = el.getBoundingClientRect();
+  const dx = a.left - b.left;
+  const dy = a.top - b.top;
+  const pasos = 12;
+  const frames = [];
+  for (let k = 0; k <= pasos; k++) {
+    const t = k / pasos;
+    const avance = t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
+    const alto = arco * 4 * t * (1 - t);
+    const elevacion = Math.sin(Math.PI * t);
+    frames.push({
+      offset: t,
+      transform: `translate(${(dx * (1 - avance)).toFixed(1)}px, ${(dy * (1 - avance) - alto).toFixed(1)}px) scale(${(1 + 0.14 * elevacion).toFixed(3)})`,
+      filter: `drop-shadow(0 ${(7 * elevacion).toFixed(1)}px ${(6 * elevacion).toFixed(1)}px rgba(0, 0, 0, 0.45))`
+    });
+  }
+  RegistrarAnimacionFicha(el, el.animate(frames, { duration: DuracionFicha() }));
+}
+
+// Bubble: dos fichas vecinas cambian de lugar, una por arriba y otra por abajo.
+function AnimarIntercambio(index1, index2) {
+  TerminarAnimacionesFichas();
+  const el1 = document.getElementById(`num${index1}`);
+  const el2 = document.getElementById(`num${index2}`);
+  if (!el1 || !el2) return;
+  const arco = el1.offsetHeight * 0.9;
+  MoverFicha(el1, el2, arco);
+  MoverFicha(el2, el1, -arco);
+}
+
+// Insertion: el valor de la izquierda se recorre una posición a la derecha.
+function AnimarDesplazamiento(indexDestino, indexOrigen) {
+  TerminarAnimacionesFichas();
+  const destino = document.getElementById(`num${indexDestino}`);
+  const origen = document.getElementById(`num${indexOrigen}`);
+  if (!destino || !origen) return;
+  MoverFicha(destino, origen, destino.offsetHeight * 0.6);
+}
+
+// Copia visual de una ficha, encima de todo, en la posición de "rect".
+function CrearFantasma(modelo, rect) {
+  const cs = getComputedStyle(modelo);
+  const f = document.createElement('div');
+  f.className = 'fichaFantasma';
+  f.textContent = modelo.textContent;
+  Object.assign(f.style, {
+    left: `${rect.left}px`,
+    top: `${rect.top}px`,
+    width: `${rect.width}px`,
+    height: `${rect.height}px`,
+    backgroundColor: cs.backgroundColor,
+    color: cs.color,
+    borderRadius: cs.borderRadius,
+    fontSize: cs.fontSize,
+    fontWeight: cs.fontWeight,
+    boxShadow: cs.boxShadow
+  });
+  document.body.appendChild(f);
+  fantasmasFichas.push(f);
+  return f;
+}
+
+// Vuelo en arco de una ficha fantasma entre dos puntos (desplazamientos
+// respecto a su posición), cambiando de escala y de opacidad.
+function VolarFantasma(f, desde, hasta, arco, opacidades) {
+  const pasos = 12;
+  const frames = [];
+  for (let k = 0; k <= pasos; k++) {
+    const t = k / pasos;
+    const avance = t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
+    const elevacion = Math.sin(Math.PI * t);
+    const x = desde.x + (hasta.x - desde.x) * avance;
+    const y = desde.y + (hasta.y - desde.y) * avance - arco * 4 * t * (1 - t);
+    const escala = (desde.escala + (hasta.escala - desde.escala) * avance) * (1 + 0.12 * elevacion);
+    frames.push({
+      offset: t,
+      transform: `translate(${x.toFixed(1)}px, ${y.toFixed(1)}px) scale(${escala.toFixed(3)})`,
+      opacity: opacidades(t),
+      filter: `drop-shadow(0 ${(7 * elevacion).toFixed(1)}px ${(6 * elevacion).toFixed(1)}px rgba(0, 0, 0, 0.45))`
+    });
+  }
+  const anim = f.animate(frames, { duration: DuracionFicha(), fill: 'forwards' });
+  animacionesFichas.push(anim);
+  anim.addEventListener('finish', () => f.remove());
+  return anim;
+}
+
+function CentroDe(rect) {
+  return { x: rect.left + rect.width / 2, y: rect.top + rect.height / 2 };
+}
+
+// Carga: una copia de la ficha del arreglo vuela hasta la variable y "entra" en ella.
+// El valor del arreglo sigue ahí (todavía no se sobrescribe).
+function AnimarCargaVariable(indexArreglo, idVariable) {
+  TerminarAnimacionesFichas();
+  const ficha = document.getElementById(`num${indexArreglo}`);
+  const variable = document.getElementById(idVariable);
+  if (!ficha || !variable || !ficha.animate || PrefiereMenosMovimiento()) return;
+
+  const rFicha = ficha.getBoundingClientRect();
+  const rVar = variable.getBoundingClientRect();
+  const a = CentroDe(rFicha), b = CentroDe(rVar);
+  const escalaFinal = Math.max(0.35, Math.min(1, rVar.height / rFicha.height));
+
+  const f = CrearFantasma(ficha, rFicha);
+  VolarFantasma(
+    f,
+    { x: 0, y: 0, escala: 1 },
+    { x: b.x - a.x, y: b.y - a.y, escala: escalaFinal },
+    rFicha.height * 0.5,
+    t => (t < 0.75 ? 1 : 1 - (t - 0.75) / 0.25)
+  );
+
+  // La variable "recibe" el valor cuando llega la ficha
+  RegistrarAnimacionFicha(variable, variable.animate([
+    { offset: 0,    opacity: 0.25, transform: 'scale(0.85)' },
+    { offset: 0.75, opacity: 0.25, transform: 'scale(0.85)' },
+    { offset: 0.88, opacity: 1,    transform: 'scale(1.3)', textShadow: '0 0 8px rgba(255, 190, 40, 0.95)' },
+    { offset: 1,    opacity: 1,    transform: 'none' }
+  ], { duration: DuracionFicha() }));
+}
+
+// Descarga: la ficha sale de la variable y vuela hasta su lugar en el arreglo.
+// La ficha del arreglo aparece justo cuando aterriza la copia.
+function AnimarDescargaVariable(indexArreglo, idVariable) {
+  TerminarAnimacionesFichas();
+  const ficha = document.getElementById(`num${indexArreglo}`);
+  const variable = document.getElementById(idVariable);
+  if (!ficha || !variable || !ficha.animate || PrefiereMenosMovimiento()) return;
+
+  const rFicha = ficha.getBoundingClientRect();
+  const rVar = variable.getBoundingClientRect();
+  const a = CentroDe(rFicha), b = CentroDe(rVar);
+  const escalaInicial = Math.max(0.35, Math.min(1, rVar.height / rFicha.height));
+
+  const f = CrearFantasma(ficha, rFicha);
+  VolarFantasma(
+    f,
+    { x: b.x - a.x, y: b.y - a.y, escala: escalaInicial },
+    { x: 0, y: 0, escala: 1 },
+    rFicha.height * 0.5,
+    t => (t < 0.15 ? 0.4 + 4 * t : (t < 0.88 ? 1 : 1 - (t - 0.88) / 0.12))
+  );
+
+  // La variable "suelta" el valor
+  RegistrarAnimacionFicha(variable, variable.animate([
+    { offset: 0,    opacity: 1,   transform: 'scale(1.2)', textShadow: '0 0 8px rgba(255, 190, 40, 0.95)' },
+    { offset: 0.3,  opacity: 0.4, transform: 'scale(0.85)' },
+    { offset: 1,    opacity: 1,   transform: 'none' }
+  ], { duration: DuracionFicha() }));
+
+  // El lugar del arreglo se ve vacío hasta que aterriza la ficha
+  RegistrarAnimacionFicha(ficha, ficha.animate([
+    { offset: 0,    opacity: 0 },
+    { offset: 0.86, opacity: 0, transform: 'scale(1)' },
+    { offset: 0.93, opacity: 1, transform: 'scale(0.93)' },
+    { offset: 1,    opacity: 1, transform: 'none' }
+  ], { duration: DuracionFicha() }));
+}
+// Fin Animación de fichas
+
 function ResetAlgoritmo() {
+  TerminarAnimacionesFichas(); // ninguna ficha queda volando al reiniciar
   // ReiniciarValoresVisualesAlg();
   EliminarSeleccionadoAnterior();
   LimpiarContadoresInstrucciones();

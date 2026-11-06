@@ -167,5 +167,7 @@ function Exchange(index1, index2) {
     arrayContainer2.textContent = numerosAlgModificados[index2];
     arrayContainer2.classList.remove(`color${colornew1}`);
     arrayContainer2.classList.add(`color${colornew2}`);
+
+    AnimarIntercambio(index1, index2);
   }
 }

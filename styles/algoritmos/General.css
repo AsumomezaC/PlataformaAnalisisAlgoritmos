@@ -453,6 +453,34 @@ header nav.title{
   background-color: rgba(255, 255, 255, 0.12);
 }
 
+/* Animación de fichas: la ficha en movimiento pasa por encima de las demás */
+.valores#valoresAlg div.divGeneralNumber div.numeroAlg{
+  position: relative;
+}
+
+.valores#valoresAlg div.divGeneralNumber div.numeroAlg.fichaEnMovimiento{
+  z-index: 5;
+}
+
+/* Copia de la ficha que vuela hacia o desde una variable (v) */
+.fichaFantasma{
+  position: fixed;
+  z-index: 1000;
+  margin: 0;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Roboto', sans-serif;
+  pointer-events: none;
+  will-change: transform, opacity;
+}
+
+/* Para poder animar el valor de las variables (escala y brillo) */
+#vValue{
+  display: inline-block;
+}
+
 /* Letras i / j / max sobre las flechas naranjas: texto oscuro (blanco sobre naranja no se lee) */
 .valores#valoresAlg div.divGeneralNumber div.iPointer,
 .valores#valoresAlg div.divGeneralNumber div.jPointer,

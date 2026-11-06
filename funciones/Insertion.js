@@ -114,6 +114,7 @@ function funcExeAlg2() {
   // Lógica del paso
   v = numerosAlgModificados[i - 1];
   UpdateVValue(v);
+  AnimarCargaVariable(i - 1, "vValue"); // el valor "entra" en v
   pasoSiguiente = 3;
 }
 
@@ -160,6 +161,7 @@ function funcExeAlg5() {
   const actualColor = Math.trunc((numerosAlgModificados[j] + 99) / 40);
   numerosAlgModificados[j] = numerosAlgModificados[j - 1];
   UpdateArrayValue(j, numerosAlgModificados[j], actualColor);
+  AnimarDesplazamiento(j, j - 1);
 
   pasoSiguiente = 6;
 }
@@ -185,6 +187,7 @@ function funcExeAlg7() {
   const actualColor = Math.trunc((numerosAlgModificados[j] + 99) / 40);
   numerosAlgModificados[j] = v;
   UpdateArrayValue(j, numerosAlgModificados[j], actualColor);
+  AnimarDescargaVariable(j, "vValue"); // el valor "sale" de v hacia su lugar
 
   pasoSiguiente = 1;
 }
