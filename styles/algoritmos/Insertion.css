@@ -38,12 +38,16 @@ header {
   /* width: 100%; */
 }
 
-#cuerpo div.izquierda div.contador div.lineas div.line pre.counter{
+#cuerpo .izquierda > div.panelDatos{
+  background-color: #0e691d62;
+}
+
+#cuerpo div.contador div.lineas div.line pre.counter{
   color: rgb(237, 237, 237);
 }
 
 /* Derecha */
-.derecha .datos p{
+#cuerpo .datos p{
   color: rgb(235, 235, 235);
   text-shadow: 2px 2px 5px rgb(28, 28, 28);
 }
@@ -80,11 +84,20 @@ header {
   background-color: #15683A;
 }
 
+/* Contorno tenue en todos los círculos (los verdes oscuros se confunden con
+   el panel; se aplica a todos para mantener consistencia) */
+.valores#valoresAlg div.divGeneralNumber div.numeroAlg {
+  box-shadow: 0 0 0 1.5px var(--contornoValor);
+}
+
+/* Fondos claros: texto oscuro para mantener contraste de 6:1 o más */
 .valores#valoresAlg div.divGeneralNumber div.numeroAlg.color3 {
   background-color: #4BA35F;
+  color: #111111;
 }
 .valores#valoresAlg div.divGeneralNumber div.numeroAlg.color4 {
   background-color: #BFA83A;
+  color: #111111;
 }
 /* Fin Colores valores Alg */
 

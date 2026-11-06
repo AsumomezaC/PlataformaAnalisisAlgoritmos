@@ -46,11 +46,8 @@ footer {
   /* width: 100%; */
 }
 
-#cuerpo div div.contador h2{
-  margin: 0;
-  margin-bottom: 2%;
-  margin-left: 2%;
-  padding: 1%;
+#cuerpo .izquierda > div.panelDatos{
+  background-color: rgba(60, 60, 60, 0.6);
 }
 /*Fin izquierda*/
 
@@ -89,12 +86,21 @@ footer {
   background-color: #325663;
 }
 
-.valores#valoresAlg div.divGeneralNumber div.numeroAlg.color3 {
-  background-color: #4A8197;
+/* Contorno tenue en todos los círculos (los azules oscuros se confunden con
+   el panel gris; se aplica a todos para mantener consistencia) */
+.valores#valoresAlg div.divGeneralNumber div.numeroAlg {
+  box-shadow: 0 0 0 1.5px var(--contornoValor);
 }
 
+/* Un tono apenas más oscuro para que el texto blanco tenga contraste 4.5:1 */
+.valores#valoresAlg div.divGeneralNumber div.numeroAlg.color3 {
+  background-color: #437A8F;
+}
+
+/* Fondo claro: texto oscuro */
 .valores#valoresAlg div.divGeneralNumber div.numeroAlg.color4 {
   background-color: #62ACCB;
+  color: #111111;
 }
 /* Fin Colores valores Alg */
 

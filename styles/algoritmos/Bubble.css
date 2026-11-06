@@ -38,13 +38,17 @@ header {
   /* width: 100%; */
 }
 
+#cuerpo .izquierda > div.panelDatos{
+  background-color: #1581a54c;
+}
+
 hr.grayDark-line2 {
   border: none; /* Elimina el estilo de borde predeterminado */
   border-top: 1px solid rgba(2, 2, 106, 0.7);
 }
 
 /* Derecha */
-.derecha .datos p{
+#cuerpo .datos p{
   text-shadow: 2px 2px 5px rgb(192, 191, 191);
 }
 
@@ -55,7 +59,7 @@ hr.grayDark-line2 {
   border-color: rgb(90, 43, 234);
 }
 
-.derecha .datos p.nName input{
+#cuerpo .datos p.nName input{
   background-color: rgba(194, 169, 194, 0.5);
 }
 
@@ -77,6 +81,13 @@ hr.grayDark-line2 {
 /* Fin n Value */
 
 /* Colores valores Alg */
+/* El panel de Bubble es claro: índices en texto oscuro sobre fondo claro */
+.valores#valoresAlg div.divGeneralNumber div.positionDiv{
+  color: #26263a;
+  text-shadow: none;
+  background-color: rgba(255, 255, 255, 0.55);
+}
+
 .valores#valoresAlg div.divGeneralNumber div.numeroAlg.color0 {
   background-color: #077F8C;
 }
