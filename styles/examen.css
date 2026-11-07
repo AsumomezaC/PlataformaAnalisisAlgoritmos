@@ -538,3 +538,116 @@ a:hover {
   }
   /* fin exit buton */
 /* fin importados */
+/* Inicio Modal "volver a responder" */
+body.modal-abierto{
+  overflow: hidden;
+}
+
+.modal-reintentar{
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  background-color: rgba(20, 20, 20, 0.55);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+  animation: modal-reintentar-fondo 0.2s ease-out;
+}
+
+.modal-reintentar[hidden]{
+  display: none;
+}
+
+.modal-reintentar__caja{
+  width: 100%;
+  max-width: 480px;
+  padding: 28px 28px 24px;
+  border-radius: 15px;
+  background-color: rgba(250, 250, 250, 0.97);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.35);
+  text-align: center;
+  font-family: 'Roboto', sans-serif;
+  animation: modal-reintentar-caja 0.25s cubic-bezier(0.2, 0.9, 0.3, 1.2);
+}
+
+.modal-reintentar__titulo{
+  margin: 0 0 10px;
+  font-size: clamp(20px, 2.6vh, 28px);
+  font-weight: 700;
+  color: #3f3f3f;
+}
+
+.modal-reintentar__texto{
+  margin: 0 0 22px;
+  font-size: clamp(16px, 2vh, 20px);
+  line-height: 1.5;
+  color: #555555;
+}
+
+.modal-reintentar__botones{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+}
+
+.modal-reintentar__boton{
+  flex: 1 1 180px;
+  padding: 10px 18px;
+  border: none;
+  border-radius: 100px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.1s;
+}
+
+.modal-reintentar__boton:active{
+  transform: scale(0.97);
+}
+
+.modal-reintentar__boton:focus-visible{
+  outline: 3px solid #1a73e8;
+  outline-offset: 2px;
+}
+
+/* mismo verde que COMPROBAR */
+.modal-reintentar__boton--si{
+  background-color: #008000;
+  color: #ffffff;
+}
+
+.modal-reintentar__boton--si:hover{
+  background-color: #006400;
+}
+
+/* mismo gris oscuro que el botón de cuestionario nuevo */
+.modal-reintentar__boton--no{
+  background-color: #e4e4e4;
+  color: #222222;
+}
+
+.modal-reintentar__boton--no:hover{
+  background-color: #d2d2d2;
+}
+
+@keyframes modal-reintentar-fondo{
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes modal-reintentar-caja{
+  from { opacity: 0; transform: translateY(12px) scale(0.96); }
+  to   { opacity: 1; transform: none; }
+}
+
+@media (prefers-reduced-motion: reduce){
+  .modal-reintentar,
+  .modal-reintentar__caja{
+    animation: none;
+  }
+}
+/* Fin Modal "volver a responder" */
