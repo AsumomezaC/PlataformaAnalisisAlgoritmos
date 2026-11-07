@@ -54,6 +54,27 @@ header.Name{
   background-color: rgb(25, 25, 25);
 }
 
+/* El código pide el ancho que necesita su línea más larga; si junto con la
+   calificación no cabe, la calificación pasa abajo en vez de aplastar el código */
+.informacionExtra > .codigo{
+  flex: 1 1 auto;
+  width: max-content;
+  max-width: 100%;
+  min-width: 0;
+}
+
+/* Si ni así cabe (celulares), las líneas largas continúan abajo en lugar de
+   mostrar una barra de desplazamiento por línea */
+.informacionExtra > .codigo pre{
+  overflow: visible;
+}
+
+.informacionExtra > .codigo pre.code{
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  min-width: 0;
+}
+
 /* título dentro de código */
 .codigo h2.title{
   font-size: 3vh;
@@ -146,6 +167,9 @@ div.line {
   font-size: clamp(25px, 2.5vh, 120px);
   align-self: stretch; /* refuerzo: que este hijo se estire si el padre lo pide */
   min-height: 0;       /* evita problemas con contenido interno en flex */
+  flex: 1 1 240px;
+  min-width: min(240px, 100%);
+  padding: 2vh 1vh;
 }
 
 .informacionExtra > .calificacion > #calificacion{
@@ -294,6 +318,16 @@ a:hover {
 
   #Preguntas div label{
     font-size: 2.8vh;
+  }
+
+  .informacionExtra{
+    margin-left: 3vh;
+    margin-right: 3vh;
+  }
+
+  /* Pseudocódigo más compacto en pantallas estrechas */
+  div.line{
+    font-size: clamp(17px, 2.3vh, 22px);
   }
 }
 
