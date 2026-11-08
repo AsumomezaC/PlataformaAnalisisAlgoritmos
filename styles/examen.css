@@ -194,6 +194,16 @@ div.line {
   margin: 2vh;
 }
 
+/* Preguntas y respuestas alineadas a la izquierda; las respuestas con una
+   pequeña sangría bajo su pregunta */
+#Preguntas{
+  text-align: left;
+}
+
+#Preguntas div label{
+  margin-left: 1em;
+}
+
 #Preguntas div h2{
   font-size: 3vh;
   color: #646464;
