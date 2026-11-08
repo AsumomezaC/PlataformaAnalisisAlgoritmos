@@ -15,7 +15,7 @@ body {
   margin: 0;
   padding: 0;
   min-height: 100vh;
-  background: url('../../imagenes/algoritmos/find.jpg') center/cover no-repeat fixed;
+  background: url('../../imagenes/algoritmos/find.webp') center/cover no-repeat fixed;
   color: #ffffff;
   font-family: 'Roboto', sans-serif;
   display: flex;
