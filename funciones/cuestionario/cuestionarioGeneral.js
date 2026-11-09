@@ -52,7 +52,7 @@ function MessageFeedback(calificacion) {
   } else if (calificacion >= 60) {
     return "Buen trabajo :)";
   } else {
-    return "Necesitas mejorar :(";
+    return "Necesitas repasar :(";
   }
 }
 
