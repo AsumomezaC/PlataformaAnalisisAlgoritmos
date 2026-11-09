@@ -37,6 +37,11 @@
         Los arreglos generados, las respuestas de las evaluaciones y las calificaciones se calculan únicamente
         dentro de tu navegador. No se envían a ningún servidor ni se guardan: desaparecen al recargar o cerrar la página.
       </p>
+      <p>
+        Al calificar una evaluación se genera un <strong>comprobante</strong> con tu calificación, tus respuestas,
+        el tiempo que tardaste, la fecha y hora, un folio y un identificador aleatorio. Todo se crea en tu navegador;
+        la plataforma no conserva ninguna copia. Si descargas el PDF, el archivo queda solo en tu dispositivo.
+      </p>
     </section>
 
     <section>
@@ -59,6 +64,11 @@
           <strong>Bootstrap, Font Awesome y Google Fonts</strong> (estilos, íconos y tipografías): al cargar la página,
           tu navegador descarga estos recursos desde sus servidores, que pueden recibir tu dirección IP y datos técnicos
           del navegador.
+        </li>
+        <li>
+          <strong>jsPDF, desde cdnjs (Cloudflare)</strong> (generación del PDF del comprobante): solo se descarga cuando
+          pides el PDF. Ese servidor puede recibir tu dirección IP y datos técnicos del navegador, pero no el contenido
+          del comprobante, que se arma dentro de tu navegador.
         </li>
         <li>
           <strong>GitHub, Instagram y LinkedIn</strong>: la página incluye enlaces a perfiles en estas plataformas.
