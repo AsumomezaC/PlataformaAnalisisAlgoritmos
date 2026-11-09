@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://visualizador-algoritmos-uaz.vercel.app/sitemap.xml
