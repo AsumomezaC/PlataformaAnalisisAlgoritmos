@@ -7,15 +7,15 @@
   <link rel="canonical" href="https://visualizador-algoritmos-uaz.vercel.app/algoritmos/examenes/Find.html">
   <link rel="icon" href="/imagenes/favicon.svg" type="image/svg+xml">
   <link rel="icon" href="/imagenes/favicon-32.png" type="image/png" sizes="32x32">
-  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/vendor/bootstrap-4.5.2/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="/styles/main.css">
   <link rel="stylesheet" href="/styles/examen.css">
 </head>
 <body>
-  <header class ="Examen">Evaluación</header>
-  <header class = "Name" onclick="Consejo()">Find Max</header>
+  <header class ="Examen" role="none" aria-hidden="true">Evaluación</header>
+  <header class = "Name" onclick="Consejo()"><span role="heading" aria-level="1" aria-label="Evaluación de Find Max">Find Max</span></header>
 
-  <div id="cuerpo">
+  <div id="cuerpo" role="main">
     <div class="informacionExtra">
       <div class="codigo">
         <h2 class="title">
@@ -51,15 +51,14 @@
     <div id="Preguntas">
       
     </div>
+    <nav class="enlaces-legales" aria-label="Información legal"><a href="/aviso-privacidad.html">Aviso de privacidad</a><span aria-hidden="true"> · </span><a href="/terminos.html">Términos de uso</a></nav>
   </div>
 
   <footer>
     <div id="new">
       <!--  From Uiverse.io by JaydipPrajapati1910  -->
-      <button type="button" class="button" onclick="Refrescar()">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="16"
+      <button type="button" class="button" onclick="Refrescar()" aria-label="Generar un cuestionario nuevo">
+        <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="16"
           height="16"
           fill="currentColor"
           class="bi bi-arrow-repeat"

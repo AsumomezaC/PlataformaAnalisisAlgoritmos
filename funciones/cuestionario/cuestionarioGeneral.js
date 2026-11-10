@@ -345,7 +345,7 @@ function CrearModalComprobante() {
       e.preventDefault();
       CerrarModalComprobante();
     } else if (e.key === "Tab") {
-      const enfocables = [...fondo.querySelectorAll("button:not([disabled])")];
+      const enfocables = [...fondo.querySelectorAll("a[href], button:not([disabled])")];
       const primero = enfocables[0], ultimo = enfocables[enfocables.length - 1];
       if (e.shiftKey && document.activeElement === primero) { e.preventDefault(); ultimo.focus(); }
       else if (!e.shiftKey && document.activeElement === ultimo) { e.preventDefault(); primero.focus(); }
@@ -381,7 +381,11 @@ function MostrarModalComprobante() {
       <dt>ID único</dt><dd class="comprobante__codigo">${c.uuid}</dd>
     </dl>
     <ol class="comprobante__preguntas">${filas}</ol>
-    <p class="comprobante__aviso">Este comprobante se genera en tu navegador. La plataforma no guarda ningún registro de tus respuestas.</p>`;
+    <p class="comprobante__aviso">
+      <strong>Constancia informativa:</strong> no es un documento oficial de la UAZ, del COZCyT ni de ninguna otra institución.
+      Se genera en tu navegador y la plataforma no guarda tus respuestas, por lo que no puede verificarse contra un registro.
+      Consulta los <a href="/terminos.html" target="_blank" rel="noopener">Términos de uso</a>.
+    </p>`;
   modal.querySelector(".comprobante__estado").textContent = "";
 
   if (modal.hidden) {
@@ -408,8 +412,8 @@ function CerrarModalComprobante() {
 
 
 // Inicio PDF del comprobante
-// jsPDF se descarga solo cuando se pide el PDF, para no hacer más pesada la página.
-const URL_JSPDF = "https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js";
+// jsPDF (alojado en el propio sitio) se carga solo cuando se pide el PDF, para no hacer más pesada la página.
+const URL_JSPDF = "/vendor/jspdf-2.5.1/jspdf.umd.min.js"; // alojado en el propio sitio
 let cargaJsPDF = null;
 
 function CargarJsPDF() {
@@ -418,7 +422,6 @@ function CargarJsPDF() {
     cargaJsPDF = new Promise((resolver, rechazar) => {
       const s = document.createElement("script");
       s.src = URL_JSPDF;
-      s.crossOrigin = "anonymous";
       s.onload = () => (window.jspdf && window.jspdf.jsPDF) ? resolver(window.jspdf.jsPDF) : rechazar(new Error("jsPDF no disponible"));
       s.onerror = () => { cargaJsPDF = null; s.remove(); rechazar(new Error("No se pudo descargar jsPDF")); };
       document.head.appendChild(s);
@@ -536,7 +539,7 @@ function ConstruirPDFComprobante(jsPDF, c) {
     doc.setFontSize(10);
     const lineasDetalle = doc.splitTextToSize(detalle, util - 30);
     const altoBloque = (lineasPregunta.length + lineasDetalle.length) * 5 + 5;
-    if (y + altoBloque > alto - 26) { doc.addPage(); y = margen + 4; }
+    if (y + altoBloque > alto - 31) { doc.addPage(); y = margen + 4; }
 
     // Etiqueta de resultado
     doc.setFont("helvetica", "bold");
@@ -564,11 +567,14 @@ function ConstruirPDFComprobante(jsPDF, c) {
     doc.setPage(n);
     doc.setDrawColor(210, 210, 210);
     doc.setLineWidth(0.3);
-    doc.line(margen, alto - 20, ancho - margen, alto - 20);
-    doc.setFont("helvetica", "normal");
+    doc.line(margen, alto - 25, ancho - margen, alto - 25);
+    doc.setFont("helvetica", "bold");
     doc.setFontSize(8);
+    doc.setTextColor(90, 90, 90);
+    doc.text("Constancia informativa. No es un documento oficial de la UAZ, del COZCyT ni de ninguna otra institución.", margen, alto - 19.5);
+    doc.setFont("helvetica", "normal");
     doc.setTextColor(120, 120, 120);
-    doc.text("Comprobante generado en el navegador del estudiante. La plataforma no guarda registros de las respuestas.", margen, alto - 14);
+    doc.text("Generada en el navegador del estudiante; la plataforma no guarda registros, por lo que no puede verificarse contra uno.", margen, alto - 14.5);
     doc.text(`Folio ${c.folio}   -   ID ${c.uuid}`, margen, alto - 9);
     doc.text(`Página ${n} de ${paginas}`, ancho - margen, alto - 9, { align: "right" });
   }

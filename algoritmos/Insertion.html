@@ -8,15 +8,15 @@
   <link rel="canonical" href="https://visualizador-algoritmos-uaz.vercel.app/algoritmos/Insertion.html">
   <link rel="icon" href="/imagenes/favicon.svg" type="image/svg+xml">
   <link rel="icon" href="/imagenes/favicon-32.png" type="image/png" sizes="32x32">
-  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="/vendor/bootstrap-4.5.2/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/vendor/fontawesome-6.4.0/css/all.min.css">
   <link rel="stylesheet" href="../styles/main.css">
   <link rel="stylesheet" href="../styles/algoritmos/General.css">
   <link rel="stylesheet" href="../styles/algoritmos/Insertion.css">
 </head>
 <body>
   <header>
-    <nav class="title" onclick="ViewInfo()">Insertion Sort</nav>
+    <nav class="title" onclick="ViewInfo()"><span role="heading" aria-level="1">Insertion Sort</span></nav>
 
     <!-- From Uiverse.io by vinodjangid07  -->
     <button class="Btn" onclick="ReturnMenu()">
@@ -25,7 +25,7 @@
     </button>
   </header>
 
-  <div id="cuerpo">
+  <div id="cuerpo" role="main">
     <div class="izquierda">
       <div class="codigo">
         <h2 class="title">
@@ -65,12 +65,12 @@
        </div>
       <div class="panelDatos">
         <div class="datos">
-          <button class ="lessNBtn"><i class="fa-solid fa-minus"></i></button>
+          <button type="button" class ="lessNBtn" aria-label="Disminuir n"><i class="fa-solid fa-minus" aria-hidden="true"></i></button>
           <p class="nName">n = 
-            <input class="nValue" id="nValue" type="number" min="0" step="1" value="0">
+            <input class="nValue" id="nValue" aria-label="Tamaño del arreglo (n)" type="number" min="0" step="1" value="0">
             </input>
           </p>
-          <button class ="moreNBtn"><i class="fa-solid fa-plus"></i></button>
+          <button type="button" class ="moreNBtn" aria-label="Aumentar n"><i class="fa-solid fa-plus" aria-hidden="true"></i></button>
           <p>
             <span class="parValor">i = <span id="iValue">—</span></span>
             <span class="space"></span>
@@ -180,6 +180,7 @@
         </button>
       </div>
     </div>
+    <nav class="enlaces-legales" aria-label="Información legal"><a href="/aviso-privacidad.html">Aviso de privacidad</a><span aria-hidden="true"> · </span><a href="/terminos.html">Términos de uso</a></nav>
   </div>
   <footer class="buttons">
       <div onclick="EjecutarTodo()">

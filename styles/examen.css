@@ -891,3 +891,59 @@ body.modal-abierto{
   }
 }
 /* Fin Cronómetro y comprobante */
+
+/* Enlaces legales discretos debajo de las preguntas */
+#Preguntas{
+  margin-bottom: 2vh;
+}
+
+.enlaces-legales{
+  margin: 0 5vh calc(9vh + 14px);
+  text-align: center;
+  font-size: 12px;
+}
+
+.enlaces-legales a{
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: 100px;
+  background-color: rgba(245, 245, 245, 0.93);
+  color: #555555;
+  text-decoration: none;
+}
+
+.enlaces-legales span{
+  color: #888888;
+}
+
+.enlaces-legales a:hover,
+.enlaces-legales a:focus-visible{
+  color: #222222;
+  text-decoration: underline;
+}
+
+@media (max-width: 760px) {
+  #Preguntas{
+    margin-bottom: 2vh;
+  }
+
+  .enlaces-legales{
+    margin: 0 3vh calc(18vh + 14px);
+  }
+}
+
+@media (max-width: 339px) {
+  #Preguntas{
+    margin-bottom: 2vh;
+  }
+
+  .enlaces-legales{
+    margin: 0 1vh calc(27vh + 14px);
+  }
+}
+
+/* Enlace a los términos dentro del comprobante */
+.comprobante__aviso a{
+  color: #6b2c6b;
+  text-decoration: underline;
+}

@@ -776,3 +776,32 @@ header nav.title{
   }
 }
 /* End my animation */
+/* Enlaces legales discretos al final del contenido */
+#cuerpo > nav.enlaces-legales{
+  flex-basis: 100%;
+  margin: 2vh 0 0;
+  text-align: center;
+  font-size: 12px;
+}
+
+nav.enlaces-legales a,
+nav.enlaces-legales span{
+  display: inline-block;
+  color: #f0f0f0;
+  background-color: rgba(20, 20, 20, 0.55);
+  padding: 2px 10px;
+  border-radius: 100px;
+  text-decoration: none;
+}
+
+nav.enlaces-legales span{
+  background: none;
+  padding: 0 2px;
+  color: transparent; /* el punto separador solo deja un espacio entre las dos píldoras */
+}
+
+nav.enlaces-legales a:hover,
+nav.enlaces-legales a:focus-visible{
+  text-decoration: underline;
+  color: #ffffff;
+}
