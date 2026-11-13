@@ -947,3 +947,29 @@ body.modal-abierto{
   color: #6b2c6b;
   text-decoration: underline;
 }
+
+/* Títulos clicables (descripción del algoritmo / consejo del examen):
+   botón nativo sin estilo propio para que también funcionen con el teclado */
+.titulo-boton{
+  margin: 0 !important;
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  color: inherit;
+  letter-spacing: inherit;
+  line-height: inherit;
+  text-align: inherit;
+  text-shadow: inherit;
+  cursor: pointer;
+}
+
+.titulo-boton:focus{
+  outline: none;
+}
+
+.titulo-boton:focus-visible{
+  outline: 3px solid currentColor;
+  outline-offset: 4px;
+  border-radius: 4px;
+}

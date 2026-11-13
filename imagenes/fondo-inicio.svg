@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice">
+  <!-- Fondo del inicio: degradado ondulado propio (cian, magenta, rosa, índigo).
+       Creado para el Visualizador de Algoritmos; sin derechos de terceros. -->
+  <defs>
+    <linearGradient id="cielo" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#3cb2ea"/>
+      <stop offset="0.35" stop-color="#9a62da"/>
+      <stop offset="1" stop-color="#b44fd3"/>
+    </linearGradient>
+    <linearGradient id="seda" x1="0" y1="0" x2="1" y2="0.35">
+      <stop offset="0" stop-color="#5a33c2"/>
+      <stop offset="0.45" stop-color="#3f63cf"/>
+      <stop offset="0.8" stop-color="#1f98dc"/>
+      <stop offset="1" stop-color="#2aa6e2"/>
+    </linearGradient>
+    <filter id="muySuave" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="90"/>
+    </filter>
+    <filter id="suave" x="-20%" y="-30%" width="140%" height="160%">
+      <feGaussianBlur stdDeviation="45"/>
+    </filter>
+    <filter id="borde" x="-10%" y="-20%" width="120%" height="140%">
+      <feGaussianBlur stdDeviation="14"/>
+    </filter>
+  </defs>
+
+  <rect width="1600" height="900" fill="url(#cielo)"/>
+
+  <!-- brillos de color del fondo -->
+  <g filter="url(#muySuave)">
+    <ellipse cx="1100" cy="-20" rx="800" ry="160" fill="#3fb8ec"/>
+    <ellipse cx="120" cy="330" rx="380" ry="230" fill="#c63fd3"/>
+    <ellipse cx="1500" cy="140" rx="260" ry="200" fill="#7e5fdd"/>
+  </g>
+
+  <!-- franja rosa clara en diagonal (el pliegue luminoso) -->
+  <path d="M380 470 C 650 430, 900 330, 1120 210 S 1450 70, 1650 60"
+        stroke="#f5c3ea" stroke-width="150" stroke-linecap="round" fill="none"
+        opacity="0.85" filter="url(#suave)"/>
+
+  <!-- tela índigo-cian que ocupa la parte baja, con borde superior ondulado -->
+  <path d="M-80 470 C 200 430, 420 520, 640 475 S 1000 380, 1220 330 S 1520 300, 1700 320 L 1700 1000 L -80 1000 Z"
+        fill="url(#seda)" filter="url(#borde)"/>
+
+  <!-- brillo suave sobre el borde de la tela -->
+  <path d="M-80 470 C 200 430, 420 520, 640 475 S 1000 380, 1220 330 S 1520 300, 1700 320"
+        stroke="#a9b8f3" stroke-width="22" fill="none" opacity="0.45" filter="url(#borde)"/>
+
+  <!-- esquinas: cian abajo a la izquierda y rosa abajo a la derecha -->
+  <g filter="url(#muySuave)">
+    <ellipse cx="80" cy="900" rx="420" ry="180" fill="#2cb6ec"/>
+    <ellipse cx="1600" cy="880" rx="300" ry="200" fill="#c77ce0"/>
+    <ellipse cx="1150" cy="620" rx="380" ry="160" fill="#1aa8e6" opacity="0.8"/>
+  </g>
+</svg>

@@ -4,7 +4,7 @@
 }
 
 :root {
-  --clr_Exam: #4bbbef;
+  --clr_Exam: #0f7bae; /* antes #4bbbef: contraste 4.7:1 con el texto blanco */
 }
 
 footer.buttons{

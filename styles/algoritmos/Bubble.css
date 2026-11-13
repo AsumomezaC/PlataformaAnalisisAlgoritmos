@@ -4,7 +4,7 @@
 }
 
 :root {
-  --clr_Exam: #1290ba;
+  --clr_Exam: #107ea3; /* antes #1290ba: contraste 4.6:1 con el texto blanco */
 }
 
 body {
