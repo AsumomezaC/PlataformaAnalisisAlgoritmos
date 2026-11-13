@@ -143,10 +143,10 @@ p {
   border: 4px solid;
   border-color: transparent;
   font-size: 16px;
-  background-color: inherit;
+  background-color: rgba(255, 235, 255, 0.8); /* antes inherit (sin relleno): texto 1.4:1 */
   border-radius: 100px;
   font-weight: 600;
-  color: rgb(221, 117, 221);
+  color: rgb(120, 40, 130); /* antes rgb(221, 117, 221) */
   box-shadow: 0 0 0 2px rgb(221, 117, 221);
   cursor: pointer;
   overflow: hidden;
@@ -156,7 +156,7 @@ p {
 .animated-button svg {
   position: absolute;
   width: 24px;
-  fill: rgb(221, 117, 221);
+  fill: rgb(120, 40, 130); /* mismo tono que el texto */
   z-index: 9;
   transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
 }
@@ -228,8 +228,10 @@ p {
   bottom: 2vw;
   left: 2vw;
   max-width: calc(100% - 4vw - 260px);
-  padding-left: 12px;
+  padding: 8px 12px;
   border-left: 3px solid rgb(221, 117, 221);
+  border-radius: 0 8px 8px 0;
+  background-color: rgba(40, 10, 60, 0.65); /* franja: enlaces 5.0:1 o más, texto 5.3:1 o más */
   text-align: left;
 }
 
@@ -267,18 +269,55 @@ p {
   color: #ffffff;
 }
 
+/* Pantallas angostas: los créditos siguen abajo a la izquierda, en la misma franja
+   que la tarjeta del programador (190 px de ancho y 260 px de alto), sin llegar a
+   ella. Se reserva esa franja al final de la página para que el contenido central
+   nunca quede debajo; si no cabe, la página se desplaza. */
 @media (max-width: 768px) {
+  body {
+    padding-bottom: calc(260px + 1.5vw + 16px);
+  }
+
+  /* Separación con la tarjeta: 12 px en celulares (créditos angostos y altos) y
+     crece con el ancho hasta 70 px, la misma que hay en escritorio, cuando los
+     créditos ya son mucho más anchos que altos */
   .creditos {
-    position: static;
-    max-width: 90%;
-    margin: 24px auto 300px;
-    padding-left: 0;
-    border-left: none;
-    text-align: center;
+    --separacion: clamp(12px, 30vw - 116px, 70px);
+    left: 1.5vw;
+    bottom: 1.5vw;
+    max-width: calc(100% - 3vw - 190px - var(--separacion));
   }
 
   .creditos-texto br {
     display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  body {
+    padding-bottom: calc(260px + 1vw + 16px);
+  }
+
+  .creditos {
+    left: 1vw;
+    bottom: 1vw;
+    max-width: calc(100% - 2vw - 190px - var(--separacion));
+  }
+}
+
+/* Solo cuando ya no caben junto a la tarjeta, suben al contenido de la página */
+@media (max-width: 359px) {
+  body {
+    padding-bottom: 0;
+  }
+
+  .creditos {
+    position: static;
+    max-width: 90%;
+    margin: 24px auto 300px;
+    border-left: none;
+    border-radius: 8px;
+    text-align: center;
   }
 }
 
@@ -287,4 +326,15 @@ p {
 html[data-teclado] #algoritmos:focus{
   outline: 2px solid #ffffff;
   outline-offset: 2px;
+}
+
+/* Bienvenida (opción B): contorno oscuro en las letras para separarlas del degradado
+   (el contraste se mide contra el contorno) y lista de algoritmos más opaca */
+#Presentacion h1,
+#Presentacion h2{
+  text-shadow: 0 0 2px rgba(20, 20, 40, 0.95), 0 0 5px rgba(20, 20, 40, 0.75), 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+#algoritmos{
+  background-color: rgba(138, 43, 226, 0.85); /* antes 0.4: 3.2:1 */
 }

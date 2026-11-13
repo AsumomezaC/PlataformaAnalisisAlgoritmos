@@ -41,11 +41,11 @@ body::before {
 }
 
 header {
-  background-color: #0979685c;
+  background-color: #097968bf; /* antes #0979685c: título blanco 3.8:1 */
 }
 
 #cuerpo div div.contador{
-  background-color: #0e691d62;
+  background-color: rgba(10, 74, 20, 0.8); /* antes #0e691d62: texto blanco 2.0:1 */
   margin-top: 5%;
   margin-left: 1vh;
   padding: 1%;
@@ -58,7 +58,7 @@ header {
 }
 
 #cuerpo .izquierda > div.panelDatos{
-  background-color: #0e691d62;
+  background-color: rgba(10, 74, 20, 0.8); /* antes #0e691d62 */
 }
 
 #cuerpo div.contador div.lineas div.line pre.counter{

@@ -45,7 +45,7 @@ body::before {
 }
 
 header {
-  background-color: rgba(128, 128, 128, 0.482);
+  background-color: rgba(128, 128, 128, 0.75); /* antes 0.482: título blanco 3.5:1 */
 }
 
 footer {
@@ -53,7 +53,7 @@ footer {
 }
 /* Inicio izquierda */
 #cuerpo div div.contador{
-  background-color: rgba(128, 128, 128, 0.6);
+  background-color: rgba(70, 70, 70, 0.8); /* antes rgba(128,128,128,.6): título 2.9:1 */
   margin-top: 5%;
   margin-left: 1vh;
   padding: 1%;
@@ -66,7 +66,7 @@ footer {
 }
 
 #cuerpo .izquierda > div.panelDatos{
-  background-color: rgba(60, 60, 60, 0.6);
+  background-color: rgba(60, 60, 60, 0.75); /* antes 0.6: texto blanco 3.9:1 */
 }
 /*Fin izquierda*/
 
@@ -149,3 +149,9 @@ footer {
 }
 
 /* Fin Exam especific button */
+/* Número de Pasos: todo el texto en blanco sobre el panel oscuro */
+#cuerpo .contador h2.contadorTitle,
+#cuerpo .contador pre.number,
+#cuerpo .contador pre[id^="counter"]{
+  color: #ffffff;
+}

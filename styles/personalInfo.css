@@ -28,8 +28,8 @@ a:hover{
 /* Fin Posicion */
 
 .agradecimientos{
-  color: #697a84;
-  font-size: 0.57em;
+  color: #54626b; /* antes #697a84 */
+  font-size: 12px; /* antes 0.57em (unos 9 px) */
 }
 
 /* Exportado */
@@ -38,7 +38,7 @@ a:hover{
 .card {
   width: 190px;
   height: 260px;
-  background: #f5f5f582;
+  background: #f5f5f5e6; /* antes #f5f5f582: el texto gris no llegaba a 4.5:1 */
   padding: 2rem 1.5rem;
   transition: box-shadow .3s ease, transform .2s ease;
  }
@@ -102,7 +102,7 @@ a:hover{
  }
  
  .card-subtitle {
-  color: #697a84;
+  color: #54626b; /* antes #697a84 */
   font-size: 0.8em;
  }
  
