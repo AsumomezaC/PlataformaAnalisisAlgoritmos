@@ -281,3 +281,10 @@ p {
     display: none;
   }
 }
+
+/* Foco visible en la lista de algoritmos solo al navegar con Tab
+   (data-teclado lo pone menu.js; un clic con el ratón lo quita) */
+html[data-teclado] #algoritmos:focus{
+  outline: 2px solid #ffffff;
+  outline-offset: 2px;
+}

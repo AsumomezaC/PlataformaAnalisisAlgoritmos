@@ -326,7 +326,7 @@ function CrearModalComprobante() {
   fondo.className = "modal-reintentar";
   fondo.hidden = true;
   fondo.innerHTML = `
-    <div class="modal-reintentar__caja comprobante" role="dialog" aria-modal="true" aria-labelledby="comprobanteTitulo">
+    <div class="modal-reintentar__caja comprobante" role="dialog" aria-modal="true" aria-labelledby="comprobanteTitulo" aria-describedby="comprobanteNota">
       <p class="comprobante__marca">Visualizador de Algoritmos · UAZ · COZCyT</p>
       <h2 id="comprobanteTitulo" class="modal-reintentar__titulo">Comprobante de evaluación</h2>
       <div class="comprobante__contenido"></div>
@@ -369,7 +369,7 @@ function MostrarModalComprobante() {
     </li>`).join("");
 
   modal.querySelector(".comprobante__contenido").innerHTML = `
-    <div class="comprobante__nota">
+    <div class="comprobante__nota" id="comprobanteNota">
       <span class="comprobante__nota-valor">${c.calificacion}</span><span class="comprobante__nota-total">/ 100</span>
       <span class="comprobante__nota-detalle">${c.aciertos} de ${c.total} correctas · ${EscaparHTML(c.mensaje)}</span>
     </div>
@@ -581,3 +581,30 @@ function ConstruirPDFComprobante(jsPDF, c) {
   return doc;
 }
 // Fin PDF del comprobante
+
+// Inicio Accesibilidad del cuestionario (sin cambios visuales)
+// "COMPROBAR" es un enlace con aspecto de botón: con Espacio también se activa,
+// como cualquier botón.
+document.addEventListener("keydown", (evento) => {
+  if (evento.key !== " ") return;
+  const boton = evento.target.closest && evento.target.closest(".btn-content");
+  if (!boton) return;
+  evento.preventDefault();
+  boton.click();
+});
+
+// Cada pregunta es un grupo de opciones con nombre (el texto de la pregunta)
+function AgruparPregunta(preguntaDiv, idTitulo) {
+  preguntaDiv.setAttribute("role", "radiogroup");
+  preguntaDiv.setAttribute("aria-labelledby", idTitulo);
+}
+
+// Al calificar, el color verde o rojo se acompaña de texto para lectores de pantalla
+function MarcarResultadoLector(label, texto) {
+  if (label.querySelector(".solo-lector")) return; // calificar dos veces no duplica
+  const marca = document.createElement("span");
+  marca.className = "solo-lector";
+  marca.textContent = ` (${texto})`;
+  label.appendChild(marca);
+}
+// Fin Accesibilidad del cuestionario

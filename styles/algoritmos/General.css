@@ -831,3 +831,22 @@ nav.enlaces-legales a:focus-visible{
   outline-offset: 4px;
   border-radius: 4px;
 }
+
+/* Texto solo para lectores de pantalla (no se ve) */
+.solo-lector{
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+/* Foco visible en el campo n solo al navegar con Tab (data-teclado lo pone algGeneral.js) */
+html[data-teclado] .datos p input:focus{
+  outline: 3px solid #1a73e8;
+  outline-offset: 2px;
+}

@@ -174,7 +174,42 @@ document.addEventListener('DOMContentLoaded', function () {
   moreBtn?.addEventListener('mouseleave', stopAction);
   moreBtn?.addEventListener('touchstart', () => startAction(true));
   moreBtn?.addEventListener('touchend', stopAction);
+
+  // Teclado: Enter o Espacio cambian n; mantener la tecla repite (repetición del sistema)
+  function teclaBotonN(isIncrement) {
+    return (evento) => {
+      if (evento.key !== 'Enter' && evento.key !== ' ') return;
+      evento.preventDefault();
+      if (isIncrement) moreN();
+      else lessN();
+    };
+  }
+  lessBtn?.addEventListener('keydown', teclaBotonN(false));
+  moreBtn?.addEventListener('keydown', teclaBotonN(true));
+
+  // Región invisible que los lectores de pantalla leen en cada paso
+  const cuerpo = document.getElementById('cuerpo');
+  if (cuerpo && !document.getElementById('anuncioPaso')) {
+    const anuncio = document.createElement('p');
+    anuncio.id = 'anuncioPaso';
+    anuncio.className = 'solo-lector';
+    anuncio.setAttribute('aria-live', 'polite');
+    cuerpo.appendChild(anuncio);
+  }
 });
+
+// Lectores de pantalla: describe la línea ejecutada y el valor de las variables.
+// Solo en "Paso a paso"; con "Ejecutar" los pasos son demasiado rápidos.
+function AnunciarPaso() {
+  const anuncio = document.getElementById('anuncioPaso');
+  if (!anuncio || seguirEjecutando) return;
+  const codigo = document.querySelector(`#codeLine${pasoActual} pre.code`);
+  const textoCodigo = codigo ? codigo.textContent.replace(/\s+/g, ' ').trim() : '';
+  const variables = [...document.querySelectorAll('.parValor')]
+    .map(el => el.textContent.replace(/\s+/g, ' ').trim())
+    .join(', ');
+  anuncio.textContent = `Línea ${pasoActual}: ${textoCodigo}. ${variables}.`;
+}
 // Fin Funciones creación y manejo de números del Algoritmo
 
 // Inicio Funciones algoritmos
@@ -191,6 +226,7 @@ function SiguientePaso(){
   }
 
   funcsExeAlg[pasoActual-1]?.();
+  AnunciarPaso();
   return true;
 }
 
@@ -614,3 +650,11 @@ function LimpiarIJMaxValues() {
 }
 // Fin I,J and Mayor update functions
 // Fin Funciones algoritmos
+// Navegación con teclado: el anillo de foco de la lista y del campo n solo se
+// muestra si se llegó con Tab; un clic o un toque lo vuelve a ocultar.
+document.addEventListener("keydown", (evento) => {
+  if (evento.key === "Tab") document.documentElement.setAttribute("data-teclado", "");
+}, true);
+document.addEventListener("pointerdown", () => {
+  document.documentElement.removeAttribute("data-teclado");
+}, true);

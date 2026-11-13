@@ -95,6 +95,7 @@ function Refrescar() {
       preguntaTitulo.innerText = preguntaObj.pregunta;
 
       preguntaDiv.appendChild(preguntaTitulo);
+      AgruparPregunta(preguntaDiv, preguntaTitulo.id);
 
       preguntaObj.respuestas.forEach((respuesta, j) => {
           const label = document.createElement("label");
@@ -133,8 +134,10 @@ function Comprobar() {
           const label = radio.parentElement;
           if (radio.value === preguntaObj.respuestaCorrecta) {
               label.classList.add("correcta");
+              MarcarResultadoLector(label, radio.checked ? "tu respuesta, correcta" : "respuesta correcta");
           } else if (radio.checked && radio.value !== preguntaObj.respuestaCorrecta) {
               label.classList.add("incorrecta");
+              MarcarResultadoLector(label, "tu respuesta, incorrecta");
           }
       });
 

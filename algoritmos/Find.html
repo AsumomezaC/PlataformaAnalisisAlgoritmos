@@ -28,7 +28,7 @@
 </head>
 <body>
   <header>
-    <nav class="title" onclick="ViewInfo()"><span role="heading" aria-level="1"><button type="button" class="titulo-boton" aria-label="Find Max: ver descripción del algoritmo">Find Max</button></span></nav>
+    <nav class="title" role="none" onclick="ViewInfo()"><span role="heading" aria-level="1"><button type="button" class="titulo-boton" aria-label="Find Max: ver descripción del algoritmo">Find Max</button></span></nav>
 
     <!-- From Uiverse.io by vinodjangid07  -->
     <button class="Btn" onclick="ReturnMenu()">
@@ -68,7 +68,6 @@
           <button type="button" class ="lessNBtn" aria-label="Disminuir n"><i class="fa-solid fa-minus" aria-hidden="true"></i></button>
           <p class="nName">n = 
             <input class="nValue" id="nValue" aria-label="Tamaño del arreglo (n)" type="number" min="0" step="1" value="0">
-            </input>
           </p>
           <button type="button" class ="moreNBtn" aria-label="Aumentar n"><i class="fa-solid fa-plus" aria-hidden="true"></i></button>
           <p>
@@ -122,7 +121,7 @@
         </div>
        </div>
       <div class="examen">
-        <button onclick="IrExamen()" href="#" class="button">
+        <button onclick="IrExamen()" class="button">
           <span class="button__icon-wrapper">
             <svg
               viewBox="0 0 14 15"

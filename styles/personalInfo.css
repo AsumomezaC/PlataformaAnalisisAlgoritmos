@@ -131,3 +131,12 @@ a:hover{
  }
 /* fin carta presentación */
 /* Fin Exportado */
+/* Con teclado, los íconos de redes aparecen al recibir el foco (igual que con el ratón) */
+.card:has(.card-social a:focus-visible) .card-info {
+  transform: translateY(-5%);
+}
+
+.card:has(.card-social a:focus-visible) .card-social {
+  transform: translateX(-16%);
+  opacity: 1;
+}
