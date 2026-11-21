@@ -21,8 +21,20 @@ let seguirEjecutando = false;
 
 // Inicio Funciones generales
 function ReturnMenu() {
-  limpiarVariablesGlobales();
-  window.location.href = "../index.html";
+  SalirDeLaPagina("../index.html");
+}
+
+// Al salir solo se detiene "Ejecutar"; el arreglo y el avance se conservan para
+// que, si el navegador restaura la página al volver con "Atrás", siga igual que
+// como se dejó (antes se vaciaba el arreglo y quedaban fichas que ya no existían).
+function SalirDeLaPagina(destino) {
+  DetenerEjecucion();
+  window.location.href = destino;
+}
+
+function DetenerEjecucion() {
+  seguirEjecutando = false;
+  ejecucionActual++; // cualquier ciclo de "Ejecutar" que esté esperando ya no continúa
 }
 
 function limpiarVariablesGlobales() {
@@ -99,40 +111,76 @@ function forEachRandomInt(n, min = -99, max = 100) {
   }
 }
 
+// Límite de n: con 50 elementos Bubble Sort ya hace más de 3,000 pasos, y un n
+// mucho mayor llenaría la página de fichas o congelaría la pestaña.
+const N_MAXIMO = 50;
+
+// Convierte lo escrito en n a un entero válido: los decimales se redondean,
+// los negativos pasan a 0 y lo que exceda el límite se queda en N_MAXIMO.
+function NormalizarN(texto) {
+  const numero = Number(texto);
+  if (texto === '' || !Number.isFinite(numero)) return 0;
+  return Math.min(N_MAXIMO, Math.max(0, Math.round(numero)));
+}
+
 document.addEventListener('DOMContentLoaded', function () {
-  // (tu código de manejar nValue y botones — lo mantuve igual)
   let pressTimer = null;
   let currentInterval = 300;
 
   const nValue = document.getElementById("nValue");
+  nValue.max = N_MAXIMO;
 
   nValue.addEventListener('input', () => {
-    let value = nValue.value;
-    value = value.replace(/\D+/g, '');
-    nValue.value = value;
-    if (value === '') {
-      value = 0;
-    } else {
-      value = parseInt(value, 10);
-    }
+    // Texto a medias que todavía no es un número ("-", "1e"): esperar a que se complete
+    if (nValue.validity && nValue.validity.badInput) return;
+    const texto = nValue.value.trim();
+    const n = NormalizarN(texto);
     clearNumbersInHTML();
-    forEachRandomInt(value);
+    forEachRandomInt(n);
+    // Negativos y valores por encima del límite se corrigen en el momento;
+    // los decimales se corrigen al salir del campo para no estorbar al escribir "3.5".
+    if (texto !== '' && (Number(texto) < 0 || Number(texto) > N_MAXIMO)) {
+      nValue.value = n;
+      if (Number(texto) > N_MAXIMO) alert(`'n' no puede ser mayor a ${N_MAXIMO}`);
+    }
   });
+
+  // Al salir del campo (o con Enter) se muestra el valor que realmente se usa: "3.5" → 4, "007" → 7
+  nValue.addEventListener('change', () => {
+    if (nValue.value.trim() === '' && !(nValue.validity && nValue.validity.badInput)) return;
+    const n = numerosAlg.length;
+    if (nValue.value !== String(n)) nValue.value = n;
+  });
+
+  // Al volver a la página con "Atrás", el navegador puede restaurar el valor de n
+  // sin el arreglo (o con fichas de una visita anterior). Si no coinciden, se genera
+  // de nuevo un arreglo del tamaño que muestra el campo.
+  function SincronizarArregloConN() {
+    const n = NormalizarN(nValue.value.trim());
+    const fichas = document.querySelectorAll('#valoresAlg .numeroAlg').length;
+    if (n !== numerosAlg.length || fichas !== numerosAlg.length) {
+      nValue.value = n;
+      clearNumbersInHTML();
+      forEachRandomInt(n);
+    }
+  }
+  SincronizarArregloConN();
+  window.addEventListener('pageshow', SincronizarArregloConN);
 
   const lessBtn = document.querySelector(".lessNBtn");
   const moreBtn = document.querySelector(".moreNBtn");
 
   function startAction(isIncrement) {
-    if (isIncrement) moreN();
-    else lessN();
-    executeRepeatedly(isIncrement);
+    const cambio = isIncrement ? moreN() : lessN();
+    if (cambio) executeRepeatedly(isIncrement);
   }
 
   function executeRepeatedly(isIncrement) {
     if (pressTimer) return;
     const execute = () => {
-      if (isIncrement) moreN();
-      else lessN();
+      pressTimer = null;
+      const cambio = isIncrement ? moreN() : lessN();
+      if (!cambio) return; // llegó al límite: se deja de repetir
       currentInterval = Math.max(50, currentInterval - 30);
       pressTimer = setTimeout(execute, currentInterval);
     };
@@ -147,20 +195,31 @@ document.addEventListener('DOMContentLoaded', function () {
     currentInterval = 300;
   }
 
+  // Devuelven true si n cambió. Al llegar a un límite se detiene la repetición
+  // ANTES de mostrar la alerta: mientras la alerta está abierta el navegador no
+  // avisa que se soltó el botón, y antes eso dejaba las alertas repitiéndose sin fin.
   function lessN() {
-    let currentValue = parseInt(nValue.value) || 0;
+    const currentValue = NormalizarN(nValue.value.trim());
     if (currentValue > 0) {
       nValue.value = currentValue - 1;
       nValue.dispatchEvent(new Event('input', { bubbles: true }));
-    } else {
-      alert("'n' no puede ser menor a 0");
+      return true;
     }
+    stopAction();
+    alert("'n' no puede ser menor a 0");
+    return false;
   }
 
   function moreN() {
-    let currentValue = parseInt(nValue.value) || 0;
-    nValue.value = currentValue + 1;
-    nValue.dispatchEvent(new Event('input', { bubbles: true }));
+    const currentValue = NormalizarN(nValue.value.trim());
+    if (currentValue < N_MAXIMO) {
+      nValue.value = currentValue + 1;
+      nValue.dispatchEvent(new Event('input', { bubbles: true }));
+      return true;
+    }
+    stopAction();
+    alert(`'n' no puede ser mayor a ${N_MAXIMO}`);
+    return false;
   }
 
   lessBtn?.addEventListener('mousedown', () => startAction(false));
@@ -249,14 +308,21 @@ function EjecutarUnPaso() {
   SiguientePaso();
 }
 
+// Cada clic en "Ejecutar" recibe un número; un ciclo anterior que despierta y ve
+// que ya no es el actual se detiene. Antes, un doble clic (o Ejecutar → Paso a
+// paso → Ejecutar) dejaba dos ciclos avanzando a la vez, al doble de velocidad.
+let ejecucionActual = 0;
+
 async function EjecutarTodo() {
+  const miEjecucion = ++ejecucionActual;
   ReiniciarValoresVisualesAlg();
   ResetAlgoritmo();
   let sleepTime = 2000;
   seguirEjecutando = true;
   intervaloEjecucion = sleepTime;
-  while (seguirEjecutando && SiguientePaso()) {
+  while (seguirEjecutando && miEjecucion === ejecucionActual && SiguientePaso()) {
     await sleep(sleepTime);
+    if (miEjecucion !== ejecucionActual) return; // otro clic tomó el control
     if (sleepTime <= 200){
       sleepTime = 200;
     } else{

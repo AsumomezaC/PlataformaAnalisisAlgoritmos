@@ -7,12 +7,13 @@ let counter4_b = [];
 let newCounter_b = false;
 
 function ViewInfo() {
-  alert("Bubble Sort es un algoritmo simple de ordenamiento ...");
+  alert(
+    "Descripción:\nEste método recorre el arreglo comparando cada elemento con el que está a su derecha; si el de la izquierda es mayor, los intercambia.\nAl terminar cada pasada, el mayor de los elementos que faltaban por ordenar queda en su posición final, al final del arreglo, por lo que la siguiente pasada recorre una posición menos. El proceso se repite hasta que ya no quedan elementos por ordenar."
+  );
 }
 
 function IrExamen() {
-  limpiarVariablesGlobales();
-  window.location.href = "../algoritmos/examenes/Bubble.html";
+  SalirDeLaPagina("../algoritmos/examenes/Bubble.html");
 }
 
 // Estados de la máquina

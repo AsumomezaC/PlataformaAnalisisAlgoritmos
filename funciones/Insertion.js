@@ -13,8 +13,7 @@ function ViewInfo() {
 }
 
 function IrExamen() {
-  limpiarVariablesGlobales();
-  window.location.href = "../algoritmos/examenes/Insertion.html";
+  SalirDeLaPagina("../algoritmos/examenes/Insertion.html");
 }
 
 /*Inicio Funciones creación y manejo de números del Algoritmo*/

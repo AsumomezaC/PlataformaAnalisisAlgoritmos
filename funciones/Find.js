@@ -6,12 +6,13 @@ let counter3 = 0;
 let counter4 = 0;
 
 function ViewInfo() {
-  alert("Descripción:\nEl algoritmo Find Max ...");
+  alert(
+    "Descripción:\nEste método supone que el primer elemento del arreglo es el mayor y lo guarda en la variable mayor.\nDespués recorre el arreglo desde la segunda posición hasta la última y compara cada elemento con mayor; si el elemento es más grande, pasa a ser el nuevo mayor.\nAl terminar el recorrido, mayor contiene el valor más grande del arreglo."
+  );
 }
 
 function IrExamen() {
-  limpiarVariablesGlobales();
-  window.location.href = "../algoritmos/examenes/Find.html";
+  SalirDeLaPagina("../algoritmos/examenes/Find.html");
 }
 
 // Estados de la máquina
@@ -68,7 +69,7 @@ function funcExeAlg1() {
   addCounterInstruction(1, counter1);
 
   if (numerosAlgModificados.length === 0) {
-    alert("Línea 1 - Excepción: La posición que se quiere alcanzar es inaxesible.");
+    alert("Línea 1 - Excepción: La posición que se quiere alcanzar es inaccesible.");
     pasoSiguiente = 0;
     return;
   }
